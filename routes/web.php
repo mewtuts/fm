@@ -27,4 +27,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/users/home', function(){
     return view('users.home');
 });
+Route::get('content', function(){
+    return view('users.content');
+});
 

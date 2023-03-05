@@ -14,7 +14,9 @@
     </style>
 </head>
 <body class="bg-black font-mono sm:2xl md:text-3xl lg:4xl xl:5xl">
-    
+        
+    {{ Session::get('username') }}
+   
     <div> <!-- NAVIGATION CONTAINER -->
         <div class="grid place-items-center p-3 bg-black">
             <img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon">
@@ -36,7 +38,7 @@
    
     <div class="p-10 text-white underline font-semibold max-h-screen h-screen overflow-auto bg-cover bg-no-repeat sm:border-y-2 border-red-600 lg:m-12 border-2" style="background-image: url(https://media1.tenor.com/images/7ee68785e912300b89900a6243419f3b/tenor.gif?itemid=16101554)"> <!-- SHOW CONTAINER -->
         <ul class="grid grid-cols-1 p-16 text-center lg:grid-cols-4 gap-4">
-            <li class="bg-gradient-to-r from-black to-red-600 border-2 border-red-600 mb-2"><a class="" href="#"><img class="md:w-screen" src="https://cdn-icons-png.flaticon.com/512/9218/9218289.png" alt="Folder Icon">Title</a>
+            <li class="bg-gradient-to-r from-black to-red-600 border-2 border-red-600 mb-2"><a class="" href="{{ '/content' }}"><img class="md:w-screen" src="https://cdn-icons-png.flaticon.com/512/9218/9218289.png" alt="Folder Icon">Title</a>
             </li>
             <li class="bg-gradient-to-r from-black to-red-600 border-2 border-red-600 mb-2"><a class="" href="#"><img class="md:w-screen" src="https://cdn-icons-png.flaticon.com/512/9218/9218289.png" alt="Folder Icon">Title</a>
             </li>
