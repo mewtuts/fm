@@ -61,7 +61,7 @@
 
         <!-- Image Section -->
         <div class="flex flex-col w-1/2 shadow-2xl">
-            <img class="bg-auto w-full hidden lg:block" src="https://s-media-cache-ak0.pinimg.com/736x/0a/a8/ab/0aa8ab40d84ccdb008f8a2de26946851.jpg" alt="Background" />
+            <img class="h-screen hidden lg:block" src="https://ih1.redbubble.net/image.896639176.9105/raf,750x1000,075,t,101010:01c5ca27c6.jpg" alt="Background" />
         </div>
     </div>
 

@@ -32,9 +32,9 @@
                 <p class="text-center text-3xl">Join Us.</p>
 
                 <form class="flex flex-col pt-3 md:pt-8" action="{{ route('register') }}" method="POST">@csrf
-
+                    
                     @if ($errors->any())
-                    <div class="flex flex-col border border-red-600">
+                    <div class="flex flex-col pt-4 border-2 border-red-600 text-red-600 p-2 md:hiden lg:hidden xl:hidden">
                     <ul>
                     @foreach ($errors->all() as $error)
                         <li class="py-2 px-3 text-lg">{{ $error }}</li>
@@ -42,7 +42,7 @@
                     </ul>
                     </div>
                     @endif
-                
+                    
                     <div class="flex flex-col pt-4">
                         <label for="id_number" class="text-lg">ID number</label>
                         <input type="text" id="id_number" name="id_number" placeholder="your school ID number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
@@ -92,8 +92,17 @@
         </div>
 
         <!-- Image Section -->
-        <div class="w-1/2 shadow-2xl">
-            <img class="bg-auto w-full hidden lg:block" src="https://s-media-cache-ak0.pinimg.com/736x/0a/a8/ab/0aa8ab40d84ccdb008f8a2de26946851.jpg" alt="Background" />
+        <div class="bg-white w-1/2 text-red-600 shadow-2xl bg-no-repeat bg-center h-screen hidden px-3 lg:block" style="background-image: url(https://wallpaperaccess.com/full/2932938.jpg)">
+            @if ($errors->any())
+            <div class="p-8 m-20 mt-64 bg-white border border-red-600 opacity-90 text-center">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li class="py-2 px-3 text-lg">{{ $error }}</li>
+            @endforeach
+            </ul>
+            </div>
+            @endif
+            {{-- <img class="h-screen w-screen hidden lg:block" src="https://s-media-cache-ak0.pinimg.com/736x/0a/a8/ab/0aa8ab40d84ccdb008f8a2de26946851.jpg" alt="Background" /> --}}
         </div>
     </div>
 
