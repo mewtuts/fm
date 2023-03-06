@@ -20,7 +20,6 @@
 <body class="bg-white font-family-karla h-screen">
 
     <div class="w-full flex flex-wrap">
-
         <!-- Login Section -->
         <div class="w-full lg:w-1/2 flex flex-col">
 
@@ -53,7 +52,7 @@
                     <input type="submit" value="Log In" name="login" class="bg-black text-white hover:text-black font-bold text-lg hover:bg-red-600 p-2 mt-8">
                 </form>
                 <div class="text-center pt-12 pb-12">
-                    <p>Don't have an account? <a href="{{ 'register' }}" class="underline font-semibold">Register here.</a></p>
+                    <p>Don't have an account? <a href="{{ '/register' }}" class="underline font-semibold">Register here.</a></p>
                 </div>
             </div>
 

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UsersController;
+use App\Models\Templates;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +26,15 @@ Route::get('/register', function () {
 
 Route::post('/register/store', [RegisterController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+ 
 
-Route::get('/users/home', function(){
-    return view('users.home');
-});
-Route::get('content', function(){
-    return view('users.content');
-});
+//USERS LOGIN ROUTE
+Route::get('/users/home', [UsersController::class, 'templates'])->name('templates');
+
+Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
+
+Route::post('/users/home', [UsersController::class, 'template'])->name('template');
+
+Route::get('/users/content/{template_id}', [UsersController::class, 'content']);
+//END OF USERS LOGIN ROUTE
 

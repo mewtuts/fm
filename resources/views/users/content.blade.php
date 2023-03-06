@@ -23,13 +23,13 @@
     @endif --}}
     <div class="text-lg"> <!-- NAVIGATION CONTAINER -->
         <div class="grid place-items-center p-3 bg-black">
-            <img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon">
+            <a href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
         </div>
         <nav class="bg-black text-red-600 border border-y-2 border-red-600">
             <ul class="grid grid-cols-3 p-2">
                 <li>Welcome Username</li>
-                <li class="text-center underline font-bold">PARENT NAME</li>
-                <li class="text-right underline"><a href="#">Logout</a></li>
+                <li class="text-center underline font-bold">{{ $contents->name }}</li>
+                <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li>
             </ul>
         </nav>
     </div><!-- END NAVIGATION CONTAINER -->
