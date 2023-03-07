@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <title>User Home Page</title>
     @vite('resources/css/app.css')
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
@@ -54,12 +55,12 @@
             <!-- MENU CONTAINER -->
             <div class="col-span-3 p-2 border-r-2 border-red-600 overflow-auto text-red-600 h-full bg-black md:col-span-1"> 
                 <div class="text-white">
-                    <ul id="ul" class="w-full border-b">
+                    <ul id="ul" class="w-full">
                         <li class=""><span class="caret">Item</span>
                             <span class="cursor-pointer"><i class="bi bi-folder-plus"></i></span>
                             <span class="cursor-pointer"><i class="bi bi-file-earmark-plus"></i></span>
                             <ul class="nested pl-5">
-                                <li class="border-b">Item 1</li>
+                                <li class="">Item 1</li>
                                 <li>Item 2</li>
                                 <li><span class="caret">Item 3</span>
                                     <ul class="nested pl-5">
