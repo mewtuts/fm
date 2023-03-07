@@ -92,7 +92,7 @@
         </div>
 
         <!-- Image Section -->
-        <div class="bg-white w-1/2 text-red-600 shadow-2xl bg-no-repeat bg-center h-screen hidden px-3 lg:block" style="background-image: url(https://wallpaperaccess.com/full/2932938.jpg)">
+        <div class="bg-white w-1/2 text-red-600 shadow-2xl bg-no-repeat bg-center hidden px-3 lg:block" style="background-image: url(https://wallpaperaccess.com/full/2932938.jpg)">
             @if ($errors->any())
             <div class="p-8 m-20 mt-64 bg-white border border-red-600 opacity-90 text-center">
             <ul>

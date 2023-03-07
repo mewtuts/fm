@@ -15,19 +15,13 @@
     </style>
 </head>
 <body class="bg-gradient-to-r from-black to-red-600">
-    {{-- @if (Session::exists('username'))
-        {{ Session::get('username') }}
-        <p>Name does exist</p>
-    @else
-        <p>Name does not exist</p>
-    @endif --}}
     <div class="text-lg"> <!-- NAVIGATION CONTAINER -->
         <div class="grid place-items-center p-3 bg-black">
             <a href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
         </div>
         <nav class="bg-black text-red-600 border border-y-2 border-red-600">
             <ul class="grid grid-cols-3 p-2">
-                <li>Welcome Username</li>
+                <li>Welcome {{ Session::get('username') }}</li>
                 <li class="text-center underline font-bold">{{ $contents->name }}</li>
                 <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li>
             </ul>
@@ -44,9 +38,6 @@
                             <!--RIGHT ARROW ICON-->
                             <span><a href="#dropdown" id="dropdown"><img class="w-8 p-2" src="https://cdn-icons-png.flaticon.com/512/626/626053.png" alt="right-arrow"></a></span> 
                             <!--END RIGHT ARROW ICON-->
-                            <!--DOWN ARROW ICON-->
-                            {{-- <span><img class="w-9 pl-4" src="https://cdn-icons-png.flaticon.com/512/6364/6364586.png" alt="down-arrow"></span> --}} 
-                            <!--END DOWN ARROW ICON-->
                             <span><img class="w-8" src="https://cdn-icons-png.flaticon.com/512/7903/7903760.png" alt="Parent"></span>
                             <a class="p-1" href="#">Parent Folder</a>   
                         </div>
@@ -59,9 +50,6 @@
                                         <!--RIGHT ARROW ICON-->
                                         <span><img class="w-8 p-2" src="https://cdn-icons-png.flaticon.com/512/626/626053.png"   alt="right-arrow"></span> 
                                         <!--END RIGHT ARROW ICON-->
-                                        <!--DOWN ARROW ICON-->
-                                        {{-- <span><img class="w-9 pl-4" src="https://cdn-icons-png.flaticon.com/512/6364/6364586.png   alt="down-arrow"></span> --}} 
-                                        <!--END DOWN ARROW ICON-->
                                         <span><img class="w-8" src="https://cdn-icons-png.flaticon.com/512/7903/7903761.png" alt="Sub"> </span>
                                         <p>Sub Folder</p>
                                     </div>   
