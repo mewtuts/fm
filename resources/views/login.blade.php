@@ -49,10 +49,10 @@
                         <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
     
-                    <input type="submit" value="Log In" name="login" class="bg-black text-white hover:text-black font-bold text-lg hover:bg-red-600 p-2 mt-8">
+                    <input type="submit" value="Log In" name="login" class=" rounded bg-black text-white cursor-pointer font-bold text-lg hover:bg-red-600 p-2 mt-8">
                 </form>
                 <div class="text-center pt-12 pb-12">
-                    <p>Don't have an account? <a href="{{ '/register' }}" class="underline font-semibold">Register here.</a></p>
+                    <p>Don't have an account? <a href="{{ '/register' }}" class=" hover:underline hover:decoration-4 font-semibold">Register here.</a></p>
                 </div>
             </div>
 
