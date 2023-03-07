@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="bg-white font-family-karla h-screen">
+<body class="bg-whitefont-family-karla h-screen">
 
     <div class="w-full flex flex-wrap">
 
@@ -78,13 +78,13 @@
                         <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
     
-                    <input type="submit" value="Register" name="register" class="bg-black text-white hover:text-black font-bold text-lg hover:bg-red-600 p-2 mt-8" />
+                    <input type="submit" value="Register" name="register" class="bg-black text-white font-bold text-lg hover:bg-red-600 p-2 mt-8 rounded cursor-pointer"/>
                 </form>
                 <div class="text-center pt-12 pb-12">
                     @if(Session::has('message'))
                         <p class="text-green-500">{{Session::get('message')}}<a class='underline font-semibold text-blue-600' href="{{ '/' }}">here </a>to login</p>
                     @else
-                    <p>Already have an account? <a href="{{ '/' }}" class="underline font-semibold">Log in here.</a></p>
+                    <p>Already have an account? <a href="{{ '/' }}" class="hover:underline font-semibold">Log in here.</a></p>
                     @endif
                 </div>
             </div>

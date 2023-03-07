@@ -27,7 +27,8 @@
         </nav>
     </div><!-- END NAVIGATION CONTAINER -->
 
-    <div class="border-y-2 border-red-600 text-red-600 p-2 my-2"> <!-- MENU CONTAINER -->
+    <!-- MENU CONTAINER -->
+    <div class="border-y-2 border-red-600 text-red-600 p-2 my-2"> 
         <form class="bg-red-600 text-black p-2 grid grid-cols-2 gap-4" action="{{ route('template') }}" method="POST">@csrf
             <input class="bg-gray-100 text-black text-center lg:p-6" type="name" placeholder="Template Name" name="name" required>
             <input class="bg-black text-red-600" type="submit" name="submit" value="Create Template" required>

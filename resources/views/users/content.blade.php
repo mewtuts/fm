@@ -12,6 +12,26 @@
             display: none;
             /* visibility: hidden; */
         }
+        /* Hide and Show the content of the Main Folder */
+        /* #ul */
+        .caret{
+            cursor: pointer;
+            user-select: none;
+        }
+        .caret::before{
+            content: '\25B6';
+            display: inline;
+            margin-right: 5px;
+        }
+        .nested{
+            display: none;
+        }
+        .active{
+            display: block;
+        }
+        .caret-down::before{
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body class="bg-gradient-to-r from-black to-red-600">
@@ -28,38 +48,32 @@
         </nav>
     </div><!-- END NAVIGATION CONTAINER -->
 
-    <div class=""><!-- CONTENT CONTAINER -->
+    <!-- CONTENT CONTAINER -->
+    <div class="">
         <main class="grid grid-cols-3 h-96 max-h-screen">
-            <div class="col-span-3 p-2 border-r-2 border-red-600 overflow-auto text-red-600 h-full bg-black md:col-span-1"> <!-- MENU CONTAINER -->
-                
-                <ul class="border bg-white border-red-600 p-2 max-h-screen overflow-auto font-semibold">
-                    <li>
-                        <div class="flex justify-start gap-x-1 font-semibold"> 
-                            <!--RIGHT ARROW ICON-->
-                            <span><a href="#dropdown" id="dropdown"><img class="w-8 p-2" src="https://cdn-icons-png.flaticon.com/512/626/626053.png" alt="right-arrow"></a></span> 
-                            <!--END RIGHT ARROW ICON-->
-                            <span><img class="w-8" src="https://cdn-icons-png.flaticon.com/512/7903/7903760.png" alt="Parent"></span>
-                            <a class="p-1" href="#">Parent Folder</a>   
-                        </div>
-
-                        <!--Sub folder & files-->
-                        <div id='subff'>
-                            <ul>
-                                <li>
-                                    <div class="flex justify-start gap-x-1 font-semibold max-h-screen overflow-auto">
-                                        <!--RIGHT ARROW ICON-->
-                                        <span><img class="w-8 p-2" src="https://cdn-icons-png.flaticon.com/512/626/626053.png"   alt="right-arrow"></span> 
-                                        <!--END RIGHT ARROW ICON-->
-                                        <span><img class="w-8" src="https://cdn-icons-png.flaticon.com/512/7903/7903761.png" alt="Sub"> </span>
-                                        <p>Sub Folder</p>
-                                    </div>   
+            <!-- MENU CONTAINER -->
+            <div class="col-span-3 p-2 border-r-2 border-red-600 overflow-auto text-red-600 h-full bg-black md:col-span-1"> 
+                <div class="text-white">
+                    <ul id="ul" class="w-full border-b">
+                        <li class=""><span class="caret">Item</span>
+                            <span class="cursor-pointer"><i class="bi bi-folder-plus"></i></span>
+                            <span class="cursor-pointer"><i class="bi bi-file-earmark-plus"></i></span>
+                            <ul class="nested pl-5">
+                                <li class="border-b">Item 1</li>
+                                <li>Item 2</li>
+                                <li><span class="caret">Item 3</span>
+                                    <ul class="nested pl-5">
+                                        <li>Item 3.1</li>
+                                        <li>Item 3.1</li>
+                                        <li>Item 3.1</li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </div><!--End Sub folder & files-->
-                    </li>
-                </ul>
-
-            </div><!-- END MENU CONTAINER -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END MENU CONTAINER -->
 
             <div class="col-span-3 p-8 text-white underline font-semibold bg-gradient-to-r from-black to-red-600 md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
                 <ul>
@@ -73,13 +87,28 @@
     <div class="bg-black bg-no-repeat bg-center h-96 border-t-2 border-red-600" style="background-image: url(https://i.pinimg.com/originals/de/d9/37/ded937b4fc8be02405d98a118dcf25ed.gif)"><!-- FOOTER CONTAINER -->
         <footer class="h-40 text-red-600 text-center pr-4 pt-72 underline">    
     </div><!-- END FOOTER CONTAINER -->
+
+    <!-- JAVASCRIPT -->
+    <script>
+        $(document).ready(function() {
+            $("#dropdown").click(function() {
+                $("#subff").fadeToggle(1000);
+            });
+        });
+
+        //  Hide and show content of the Main Folder
+        var toggler = document.getElementsByClassName("caret");
+        for (var i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function(){
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+
+        // Append Ul
+
+        // Append li
+            
+        }
+    </script>
 </body>
 </html>
-
-<script>
-$(document).ready(function() {
-    $("#dropdown").click(function() {
-        $("#subff").fadeToggle(1000);
-    });
-});
-</script>
