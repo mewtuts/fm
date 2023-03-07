@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('content_id')->nullable();
             $table->string('path')->nullable();
             $table->string('year')->nullable();
+            $table->string('user_id')->nullable();
             $table->timestamps();
         });
     }

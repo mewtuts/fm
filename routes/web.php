@@ -36,5 +36,7 @@ Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
 Route::post('/users/home', [UsersController::class, 'template'])->name('template');
 
 Route::get('/users/content/{template_id}', [UsersController::class, 'content']);
+
+Route::post('/users/content/{template_id}/{name}/mkdir', [UsersController::class, 'mkdir']);
 //END OF USERS LOGIN ROUTE
 

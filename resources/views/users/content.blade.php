@@ -46,7 +46,7 @@
         <!-- <nav class="bg-black text-red-600 border border-y-2 border-red-600">
             <ul class="text-left p-2">
                 <li>Welcome {{ Session::get('username') }}</li> -->
-                <!-- <li class="text-center underline font-bold">{{ $contents->name }}</li> -->
+                <!-- <li class="text-center underline font-bold">{{ $templates->name }}</li> -->
                 <!-- <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li> -->
             <!-- </ul>
         </nav> --> 
@@ -54,18 +54,19 @@
 
     <!-- CONTENT CONTAINER -->
     <div class="max-h-full h-fit">
-    <span class="text-white text-xl p-2">{{ $contents->name }} Folder</span>
+    <span class="text-white text-xl p-2">{{ $templates->name }} Folder</span>
         <main class="grid grid-cols-3 mt-3 border-t-2 border-t-red-700">
             <!-- MENU CONTAINER -->
             <div class="col-span-3 p-2 border-r-2 border-red-700 shadow-inner overflow-auto text-red-600 h-full md:col-span-1"> 
                 <div class="text-white p-2">
+
                     <ul id="ul" class="w-full">
-                        <li class=""><span class="caret text-xl">Item</span>
+                        <li class=""><span class="caret text-xl">{{ $templates->name }}</span>
                             <!-- Folder Upload -->
                             <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
                             <span id="show_addForm" class="remove_form">
-                                <form action="#" class="absolute mt-3 bg-slate-200 p-2 rounded"> 
-                                    <input type="text" name="upload-folder" class="mt-3 rounded">
+                                <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
+                                    <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
                                     <div class="flex justify-between mt-2">
                                         <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
                                     </div>
@@ -78,16 +79,19 @@
                             <form action="" class="border-2 hidden">
                                 <input type="file" id="upload-file" name="upload-file">
                             </form>
+                            
                             <ul class="nested pl-5">
                                 <li class="">Item 1</li>
                                 <li>Item 2</li>
-                                <li><span class="caret">Item 3</span>
-                                    <ul class="nested pl-5">
-                                        <li>Item 3.1</li>
-                                        <li>Item 3.1</li>
-                                        <li>Item 3.1</li>
-                                    </ul>
-                                </li>
+                          
+                                    <li><span class="caret"> item-3</span>
+                                        <ul class="nested pl-5">
+                                            <li>Item 3.1</li>
+                                            <li>Item 3.1</li>
+                                            <li>Item 3.1</li>
+                                        </ul>
+                                    </li>
+                           
                             </ul>
                         </li>
                     </ul>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('template_id')->nullable();
             $table->string('caption')->nullable();
             $table->string('parent_id')->nullable();
+            $table->string('user_id')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class LoginController extends Controller
             $users = Users::Select('id', 'username', 'password', 'id_number', 'first_name', 'middle_name', 'last_name', 'email')->where('username', $request->username)->where('password', $request->password)->first();
             if($users)
             {
+                session()->put('user_id', $users->id);
                 session()->put('username', $users->username);
                 session()->put('id_number', $users->id_number);
                 session()->put('first_name', $users->first_name);
