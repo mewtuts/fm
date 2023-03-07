@@ -54,11 +54,11 @@
         <main class="grid grid-cols-3 h-96 max-h-screen">
             <!-- MENU CONTAINER -->
             <div class="col-span-3 p-2 border-r-2 border-red-600 overflow-auto text-red-600 h-full bg-black md:col-span-1"> 
-                <div class="text-white">
+                <div class="text-white p-2">
                     <ul id="ul" class="w-full">
-                        <li class=""><span class="caret">Item</span>
-                            <span class="cursor-pointer"><i class="bi bi-folder-plus"></i></span>
-                            <span class="cursor-pointer"><i class="bi bi-file-earmark-plus"></i></span>
+                        <li class=""><span class="caret text-xl">Item</span>
+                            <span title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                            <span title="New File" class="cursor-pointer font-black px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-file-earmark"></i></span>
                             <ul class="nested pl-5">
                                 <li class="">Item 1</li>
                                 <li>Item 2</li>
@@ -76,18 +76,21 @@
             </div>
             <!-- END MENU CONTAINER -->
 
-            <div class="col-span-3 p-8 text-white underline font-semibold bg-gradient-to-r from-black to-red-600 md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
+            <div class="col-span-3 p-4 text-xl text-white font-semibold bg-gradient-to-r from-black to-red-600 md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
                 <ul>
                     <li class="hover:text-yellow-100 focus:text-yellow-300">file.txt</li>
                     <li class="hover:text-yellow-100 focus:text-yellow-300">file.png</li>
                     <li class="hover:text-yellow-100 focus:text-yellow-300">file.pdf</li>
                 </ul>
-            </div><!-- END SHOW CONTAINER -->
+            </div>
+            <!-- END SHOW CONTAINER -->
         </main>
-    </div><!-- END CONTENT CONTAINER -->
-    <div class="bg-black bg-no-repeat bg-center h-96 border-t-2 border-red-600" style="background-image: url(https://i.pinimg.com/originals/de/d9/37/ded937b4fc8be02405d98a118dcf25ed.gif)"><!-- FOOTER CONTAINER -->
+    </div>
+    <!-- END CONTENT CONTAINER -->
+
+    <!-- <div class="bg-black bg-no-repeat bg-center h-96 border-t-2 border-red-600" style="background-image: url(https://i.pinimg.com/originals/de/d9/37/ded937b4fc8be02405d98a118dcf25ed.gif)">
         <footer class="h-40 text-red-600 text-center pr-4 pt-72 underline">    
-    </div><!-- END FOOTER CONTAINER -->
+    </div> -->
 
     <!-- JAVASCRIPT -->
     <script>
