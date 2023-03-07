@@ -63,14 +63,14 @@
                         <li class=""><span class="caret text-xl">Item</span>
                             <!-- Folder Upload -->
                             <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
-                            <span id="show_addForm">
+                            <span id="show_addForm" class="remove_form">
                                 <form action="#" class="absolute mt-3 bg-slate-200 p-2 rounded"> 
-                                    <input type="text" name="upload-folder">
+                                    <input type="text" name="upload-folder" class="mt-3 rounded">
                                     <div class="flex justify-between mt-2">
-                                        <input type="submit" class="w-5/12 bg-blue-800 rounded">
+                                        <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
                                     </div>
                                 </form>
-                                <button id="cancel_addForm" class="text-white" type="submit">Cancel</button>
+                                <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
                             </span>
                            
                             <!-- File Upload -->
@@ -115,12 +115,12 @@
     <script>
         $(document).ready(function() {
             $("#addFolder").click(function() {
-                $("#show_addForm").fadeToggle(1000);
+                $("#show_addForm").fadeToggle();
             });
         });
         $(document).ready(function() {
             $("#cancel_addForm").click(function() {
-                $("#show_addForm").hide(1000);
+                $(".remove_form").hide();
             });
         });
         //  Hide and show content of the Main Folder
