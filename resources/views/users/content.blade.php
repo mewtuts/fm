@@ -33,32 +33,51 @@
         .caret-down::before{
             transform: rotate(90deg);
         }
+        #show_addForm{
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-r from-black to-red-600">
+<body class=" h-screen bg-gradient-to-r from-black to-red-600">
     <div class="text-lg"> <!-- NAVIGATION CONTAINER -->
-        <div class="grid place-items-center p-3 bg-black">
-            <a href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
+        <div class="p-3 flex justify-between">
+            <a title="Home" href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
         </div>
-        <nav class="bg-black text-red-600 border border-y-2 border-red-600">
-            <ul class="grid grid-cols-3 p-2">
-                <li>Welcome {{ Session::get('username') }}</li>
-                <li class="text-center underline font-bold">{{ $contents->name }}</li>
-                <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li>
-            </ul>
-        </nav>
+        <!-- <nav class="bg-black text-red-600 border border-y-2 border-red-600">
+            <ul class="text-left p-2">
+                <li>Welcome {{ Session::get('username') }}</li> -->
+                <!-- <li class="text-center underline font-bold">{{ $contents->name }}</li> -->
+                <!-- <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li> -->
+            <!-- </ul>
+        </nav> --> 
     </div><!-- END NAVIGATION CONTAINER -->
 
     <!-- CONTENT CONTAINER -->
-    <div class="">
-        <main class="grid grid-cols-3 h-96 max-h-screen">
+    <div class="max-h-full h-fit">
+    <span class="text-white text-xl p-2">{{ $contents->name }} Folder</span>
+        <main class="grid grid-cols-3 mt-3 border-t-2 border-t-red-700">
             <!-- MENU CONTAINER -->
-            <div class="col-span-3 p-2 border-r-2 border-red-600 overflow-auto text-red-600 h-full bg-black md:col-span-1"> 
+            <div class="col-span-3 p-2 border-r-2 border-red-700 shadow-inner overflow-auto text-red-600 h-full md:col-span-1"> 
                 <div class="text-white p-2">
                     <ul id="ul" class="w-full">
                         <li class=""><span class="caret text-xl">Item</span>
-                            <span title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
-                            <span title="New File" class="cursor-pointer font-black px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-file-earmark"></i></span>
+                            <!-- Folder Upload -->
+                            <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                            <span id="show_addForm">
+                                <form action="#" class="absolute mt-3 bg-slate-200 p-2 rounded"> 
+                                    <input type="text" name="upload-folder">
+                                    <div class="flex justify-between mt-2">
+                                        <input type="submit" class="w-5/12 bg-blue-800 rounded">
+                                    </div>
+                                </form>
+                                <button id="cancel_addForm" class="text-white" type="submit">Cancel</button>
+                            </span>
+                           
+                            <!-- File Upload -->
+                            <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i></label>
+                            <form action="" class="border-2 hidden">
+                                <input type="file" id="upload-file" name="upload-file">
+                            </form>
                             <ul class="nested pl-5">
                                 <li class="">Item 1</li>
                                 <li>Item 2</li>
@@ -76,11 +95,11 @@
             </div>
             <!-- END MENU CONTAINER -->
 
-            <div class="col-span-3 p-4 text-xl text-white font-semibold bg-gradient-to-r from-black to-red-600 md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
+            <div class="col-span-3 p-4 text-xl text-white font-semibold md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
                 <ul>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300">file.txt</li>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300">file.png</li>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300">file.pdf</li>
+                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.txt</li>
+                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.png</li>
+                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.pdf</li>
                 </ul>
             </div>
             <!-- END SHOW CONTAINER -->
@@ -95,11 +114,15 @@
     <!-- JAVASCRIPT -->
     <script>
         $(document).ready(function() {
-            $("#dropdown").click(function() {
-                $("#subff").fadeToggle(1000);
+            $("#addFolder").click(function() {
+                $("#show_addForm").fadeToggle(1000);
             });
         });
-
+        $(document).ready(function() {
+            $("#cancel_addForm").click(function() {
+                $("#show_addForm").hide(1000);
+            });
+        });
         //  Hide and show content of the Main Folder
         var toggler = document.getElementsByClassName("caret");
         for (var i = 0; i < toggler.length; i++) {
