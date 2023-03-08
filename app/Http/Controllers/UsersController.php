@@ -15,19 +15,24 @@ use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 class UsersController extends Controller
 {
     public function template(Request $request){
+
         $request->validate([
             'name' => 'required|unique:templates'
         ]);
+
         $user_id = FacadesSession::get('user_id');
 
-        $templates = new Templates();
-        $templates->name = $request->name;
-        $templates->user_id = $user_id;
-        $templates->save();
+        $template = new Templates();
+        $template->name = $request->name;
+        $template->user_id = $user_id;
+        $template->save();
 
         $dir = str_replace(' ', '', $request->name);
-
-        Storage::disk('local')->makeDirectory($dir.$user_id);
+        
+        //getting the lates row in Contents Table
+        $template = Templates::select('id')->latest('created_at')->first();
+        
+        Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template->id);
 
         return redirect(route('templates'))->with('successs', 'Template created success!');
 
@@ -51,20 +56,12 @@ class UsersController extends Controller
         ]);
     }
 
-    public function content($template_id){
-            
+    public function content($template_id){  
         return view('users.content', [
             'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
             'contents' => Contents::select('id', 'template_id', 'caption', 'parent_id')->where('template_id', $template_id)->get(),
             'files' => Files::select('id', 'content_id', 'path', 'year')->get()
         ]);
-
-        // return view('users.content', [
-        //     'contents' => Templates::join('contents', 'contents.template_id', '=', 'template_id')
-        //                 ->join('files', 'files.content_id', '=', 'content_id')
-        //                 ->where('contents.template_id', $template_id)
-        //                 ->get(['templates.*', 'contents.*', 'files.*'])
-        // ]);
     }
 
     public function mkdir(Request $request, $template_id, $name){
@@ -83,9 +80,9 @@ class UsersController extends Controller
             $contents->user_id = $user_id;
             $contents->save();
 
-            $dir = str_replace(' ', '', $name).$template_id;
+            $dir = str_replace(' ', '', $name);
 
-            Storage::disk('local')->makeDirectory($dir.'/'.$request->name_folder.$user_id);
+            Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template_id.'/'.$request->name_folder);
             
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
@@ -107,9 +104,9 @@ class UsersController extends Controller
             $contents->parent_id = $content_id->id;
             $contents->save();
 
-            $dir = str_replace(' ', '', $name).$template_id;
+            $dir = str_replace(' ', '', $name);
 
-            Storage::disk('local')->makeDirectory($dir.'/'.$request->name_folder.$user_id);
+            Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template_id.'/'.$request->name_folder);
             
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),

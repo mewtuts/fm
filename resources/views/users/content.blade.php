@@ -62,7 +62,6 @@
 
                     <ul id="ul" class="w-full">
                         <li class=""><span class="caret text-xl">{{ $templates->name }}</span>
-                            <!-- Folder Upload -->
                             <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
                             <span id="show_addForm" class="remove_form">
                                 <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
@@ -79,8 +78,39 @@
                             <form action="" class="border-2 hidden">
                                 <input type="file" id="upload-file" name="upload-file">
                             </form>
-                            
                             <ul class="nested pl-5">
+                            @foreach ($contents as $content)
+                                
+                                @if($content->count() >= 0)
+                                    <li class=""><span class="caret text-xl">{{ $content->caption }}</span>
+                                        <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                                        <span id="show_addForm" class="remove_form">
+                                            <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
+                                                <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
+                                                <div class="flex justify-between mt-2">
+                                                    <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
+                                                </div>
+                                            </form>
+                                            
+                                            <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
+                                        </span>
+        
+                                        <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i></label>
+                                        <form action="" class="border-2 hidden">
+                                            <input type="file" id="upload-file" name="upload-file">
+                                        </form>
+                                @else
+
+                                
+                                @endif
+                                
+                            @endforeach
+                        </ul>
+                    </li>
+                            <!-- Folder Upload -->
+                        
+                            
+                            {{-- <ul class="nested pl-5">
                                 <li class="">Item 1</li>
                                 <li>Item 2</li>
                           
@@ -92,7 +122,7 @@
                                         </ul>
                                     </li>
                            
-                            </ul>
+                            </ul> --}}
                         </li>
                     </ul>
                 </div>
