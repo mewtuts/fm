@@ -68,7 +68,7 @@
                            
                             <!-- File Upload -->
                             <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i></label>
-                            <form id="addFileForm" action="{{ 'users/content/file/upload/'.$content_id }}" class="border-2 hidden">
+                            <form id="addFileForm" action="{{ '/users/content/file/upload/'.$content_id }}" method="POST" class="border-2 hidden" enctype="multipart/form-data">@csrf
                                 <input type="file" id="upload-file" name="file">
                                 <input type="submit" name="file_upload">
                             </form>
@@ -99,7 +99,7 @@
                                             <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i>
                                             </label>
 
-                                            <form action="" class="border-2 hidden">
+                                            <form action="{{ 'users/content/file/upload/'.$content->id }}" class="border-2 hidden">
                                                 <input type="file" id="upload-file" name="upload-file">
                                             </form>
                                     @else  
