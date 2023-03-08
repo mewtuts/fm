@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 class UsersController extends Controller
 {
     public function template(Request $request){
+        $request->validate([
+            'name' => 'required|alpha_dash|unique:templates'
+        ]);
 
         $user_id = FacadesSession::get('user_id');
 
@@ -74,7 +77,9 @@ class UsersController extends Controller
     }
 
     public function mkdir(Request $request, $template_id, $name){
-
+        $request->validate([
+            'caption' => 'required|alpha_dash|unique:contents'
+        ]);
         //Checking if it have already parent id value in database. 
         $check = Contents::select('parent_id', 'id')->where('template_id', $template_id)->get();
         $checkCount = $check->count();
@@ -101,7 +106,9 @@ class UsersController extends Controller
             ]);
 
         }else{
-
+            $request->validate([
+                'caption' => 'required|alpha_dash|unique:contents'
+            ]);
             $content_id = Contents::select('id')->where('template_id', $template_id)->first();
 
 
