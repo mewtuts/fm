@@ -56,6 +56,7 @@
                     <ul id="ul" class="w-full">
                         <li class=""><span class="caret text-xl">{{ $templates->name }}</span>
                             <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                            
                             <span id="show_addForm" class="remove_form">
                                 <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
                                     <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>

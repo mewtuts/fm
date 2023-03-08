@@ -16,18 +16,16 @@ class UsersController extends Controller
 {
     public function template(Request $request){
 
-        $request->validate([
-            'name' => 'required|unique:templates'
-        ]);
-
         $user_id = FacadesSession::get('user_id');
+
+        $request->validate([
+            'name' => 'required|alpha_dash|unique:templates'
+        ]);
 
         $template = new Templates();
         $template->name = $request->name;
         $template->user_id = $user_id;
         $template->save();
-
-        $dir = str_replace(' ', '', $request->name);
         
         //getting the lates row in Contents Table
         $template = Templates::select('id')->latest('created_at')->first();
@@ -38,7 +36,7 @@ class UsersController extends Controller
         $contents->user_id = $user_id;
         $contents->save();
         
-        Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template->id);
+        Storage::disk('local')->makeDirectory($user_id.'_'.$request->name);
 
         return redirect(route('templates'))->with('successs', 'Template created success!');
 
@@ -91,9 +89,9 @@ class UsersController extends Controller
             $contents->user_id = $user_id;
             $contents->save();
 
-            $dir = str_replace(' ', '', $name);
+      
 
-            Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template_id.'/'.$request->name_folder);
+            Storage::disk('local')->makeDirectory($user_id.'_'.$name.'/'.$request->name_folder);
             
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
@@ -118,7 +116,7 @@ class UsersController extends Controller
 
             $dir = str_replace(' ', '', $name);
 
-            Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template_id.'/'.$request->name_folder);
+            Storage::disk('local')->makeDirectory($user_id.'_'.$name.'/'.$request->name_folder);
             
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
@@ -133,17 +131,24 @@ class UsersController extends Controller
        
         $user_id = FacadesSession::get('user_id');
 
-        // $path = Storage::putFile('akatsu', $request->file('akatsuki_1_1/itachi'));
+        $contents = Contents::select('template_id', 'caption')->where('id', $content_id)->first();
+        $templates = Templates::select('id', 'name')->where('id', $contents->template_id)->first();
 
-        $request->file('file')->store('akatsuki_1_1/itachi');
+        $filename = $request->file('file')->getClientOriginalName();
+        $path = storage_path($user_id.'_'.$templates->name.'/'.$contents->caption.'.'.$filename);
+
+        $files = new Files();
+        $files->user_id = $user_id;
+        $files->content_id = $content_id;
+        $files->path = $path;
+        $files->year = now();
+        $files->save();
+
+        $request->file('file')->store($user_id.'_'.$templates->name.'/'.$contents->caption);
 
         return redirect('/users/content/'.$content_id);
 
-        // $files = new Files();
-        // $files->content_id = $content_id;
-        // $files->path = $request->file;
-
-        // return $request->file('file')->store('docs');
+        
     }
 
 }
