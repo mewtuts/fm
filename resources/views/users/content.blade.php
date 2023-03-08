@@ -41,7 +41,8 @@
 <body class=" h-screen bg-gradient-to-r from-black to-red-600">
     <div class="text-lg"> <!-- NAVIGATION CONTAINER -->
         <div class="p-3 flex justify-between">
-            <a title="Home" href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
+            <a title="Home" href="{{ route('templates') }}"><img class="w-11 ml-1" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
+            <span class="text-white text-xl p-2">{{ $templates->name }} Folder</span>
         </div>
         <!-- <nav class="bg-black text-red-600 border border-y-2 border-red-600">
             <ul class="text-left p-2">
@@ -54,8 +55,7 @@
 
     <!-- CONTENT CONTAINER -->
     <div class="max-h-full h-fit">
-    <span class="text-white text-xl p-2">{{ $templates->name }} Folder</span>
-        <main class="grid grid-cols-3 mt-3 border-t-2 border-t-red-700">
+        <main class="grid grid-cols-3 border-t-2 border-t-zinc-300">
             <!-- MENU CONTAINER -->
             <div class="col-span-3 p-2 border-r-2 border-red-700 shadow-inner overflow-auto text-red-600 h-full md:col-span-1"> 
                 <div class="text-white p-2">
