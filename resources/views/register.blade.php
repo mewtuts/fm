@@ -78,6 +78,11 @@
                         <label for="password" class="text-lg">Password</label>
                         <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
+
+                    <div class="flex flex-col pt-4">
+                        <label for="password" class="text-lg">Confirm Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
     
                     <input type="submit" value="Register" name="register" class="bg-black text-white font-bold text-lg hover:bg-red-600 p-2 mt-8 rounded cursor-pointer"/>
                 </form>
