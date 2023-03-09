@@ -130,13 +130,20 @@ class UsersController extends Controller
     }
 
     public function upload_file(Request $request, $content_id){
+       
+        $user_id = FacadesSession::get('user_id');
 
-        $files = new Files();
-        $files->content_id = $content_id;
-        $files->path = 'none';
-        $files->type = 'none';
-        $files->size = 'none';
-        $files->year = 'none';
+        // $path = Storage::putFile('akatsu', $request->file('akatsuki_1_1/itachi'));
+
+        $request->file('file')->store('akatsuki_1_1/itachi');
+
+        return redirect('/users/content/'.$content_id);
+
+        // $files = new Files();
+        // $files->content_id = $content_id;
+        // $files->path = $request->file;
+
+        // return $request->file('file')->store('docs');
     }
 
 }
