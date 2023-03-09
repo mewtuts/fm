@@ -31,6 +31,12 @@ class UsersController extends Controller
         
         //getting the lates row in Contents Table
         $template = Templates::select('id')->latest('created_at')->first();
+
+        $contents = new Contents();
+        $contents->caption = $request->name;
+        $contents->template_id = $template->id;
+        $contents->user_id = $user_id;
+        $contents->save();
         
         Storage::disk('local')->makeDirectory($dir.'_'.$user_id.'_'.$template->id);
 
@@ -52,15 +58,20 @@ class UsersController extends Controller
 
     public function templates(){
         return view('users.home', [
-            'templates' => Templates::get()
+            'templates' => Templates::get(),
+            'contents' => Contents::get()
         ]);
     }
 
     public function content($template_id){  
+
+        $contents = Contents::select('id')->where('template_id', $template_id)->first();
+
         return view('users.content', [
             'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
             'contents' => Contents::select('id', 'template_id', 'caption', 'parent_id')->where('template_id', $template_id)->get(),
-            'files' => Files::select('id', 'content_id', 'path', 'year')->get()
+            'files' => Files::select('id', 'content_id', 'path', 'year')->get(),
+            'content_id' => $contents->id
         ]);
     }
 
@@ -114,6 +125,16 @@ class UsersController extends Controller
                 'files' => Files::select('id', 'content_id', 'path', 'year')->get()
             ]);
         }
+    }
+
+    public function upload_file(Request $request, $content_id){
+
+        $files = new Files();
+        $files->content_id = $content_id;
+        $files->path = 'none';
+        $files->type = 'none';
+        $files->size = 'none';
+        $files->year = 'none';
     }
 
 }

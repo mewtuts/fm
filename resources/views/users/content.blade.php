@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <title>User Home Page</title>
+    <title>@yield('directories') Directories Page</title>
     @vite('resources/css/app.css')
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <style>
@@ -43,13 +43,6 @@
         <div class="p-3 flex justify-between">
             <a title="Home" href="{{ route('templates') }}"><img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon"></a>
         </div>
-        <!-- <nav class="bg-black text-red-600 border border-y-2 border-red-600">
-            <ul class="text-left p-2">
-                <li>Welcome {{ Session::get('username') }}</li> -->
-                <!-- <li class="text-center underline font-bold">{{ $templates->name }}</li> -->
-                <!-- <li class="text-right underline"><a href="{{ route('logout') }}">Logout</a></li> -->
-            <!-- </ul>
-        </nav> --> 
     </div><!-- END NAVIGATION CONTAINER -->
 
     <!-- CONTENT CONTAINER -->
@@ -75,35 +68,42 @@
                            
                             <!-- File Upload -->
                             <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i></label>
-                            <form action="" class="border-2 hidden">
-                                <input type="file" id="upload-file" name="upload-file">
+                            <form id="addFileForm" action="{{ 'users/content/file/upload/'.$content_id }}" class="border-2 hidden">
+                                <input type="file" id="upload-file" name="file">
+                                <input type="submit" name="file_upload">
                             </form>
-                            <ul class="nested pl-5">
-                            @foreach ($contents as $content)
-                                
-                                @if($content->count() >= 0)
-                                    <li class=""><span class="caret text-xl">{{ $content->caption }}</span>
-                                        <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
-                                        <span id="show_addForm" class="remove_form">
-                                            <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
-                                                <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
-                                                <div class="flex justify-between mt-2">
-                                                    <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
-                                                </div>
-                                            </form>
-                                            
-                                            <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
-                                        </span>
-        
-                                        <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i></label>
-                                        <form action="" class="border-2 hidden">
-                                            <input type="file" id="upload-file" name="upload-file">
-                                        </form>
-                                @else
 
-                                
+                            <ul class="nested pl-5">
+                            
+                                @foreach ($contents as $content)
+
+                                @if($content->parent_id == null)
+
+                                    @elseif($content->count() >= 0)
+                                        <li class="">
+                                            <span class="caret text-xl">{{ $content->caption }}</span>
+
+                                            <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+
+                                            <span id="show_addForm" class="remove_form">
+                                                <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
+                                                    <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
+                                                    <div class="flex justify-between mt-2">
+                                                        <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
+                                                    </div>
+                                                </form>
+                                                
+                                                <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
+                                            </span>
+            
+                                            <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i>
+                                            </label>
+
+                                            <form action="" class="border-2 hidden">
+                                                <input type="file" id="upload-file" name="upload-file">
+                                            </form>
+                                    @else  
                                 @endif
-                                
                             @endforeach
                         </ul>
                     </li>
@@ -129,14 +129,10 @@
             </div>
             <!-- END MENU CONTAINER -->
 
-            <div class="col-span-3 p-4 text-xl text-white font-semibold md:col-span-2 lg:col-span2"> <!-- SHOW CONTAINER -->
-                <ul>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.txt</li>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.png</li>
-                    <li class="hover:text-yellow-100 focus:text-yellow-300 cursor-pointer">file.pdf</li>
-                </ul>
+            <div class="col-span-3 p-4 text-xl text-white font-semibold md:col-span-2 lg:col-span2">
+                @yield('content')
             </div>
-            <!-- END SHOW CONTAINER -->
+
         </main>
     </div>
     <!-- END CONTENT CONTAINER -->
@@ -164,12 +160,14 @@
                 this.parentElement.querySelector(".nested").classList.toggle("active");
                 this.classList.toggle("caret-down");
             });
-
+        }
         // Append Ul
 
         // Append li
-            
-        }
+        
+        document.getElementById("upload-file").onchange = function() {
+        document.getElementById("addFileForm").submit();
+        };
     </script>
 </body>
 </html>

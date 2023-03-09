@@ -15,11 +15,18 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('content_id')->nullable();
             $table->string('path')->nullable();
+            $table->string('type')->nullable();
+            $table->string('size')->nullable();
             $table->string('year')->nullable();
-            $table->string('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
