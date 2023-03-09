@@ -78,7 +78,7 @@ class UsersController extends Controller
     public function mkdir(Request $request, $template_id, $name){
 
         //Checking if it have already parent id value in database. 
-        $check = Contents::select('parent_id')->where('template_id', $template_id)->get();
+        $check = Contents::select('parent_id', 'id')->where('template_id', $template_id)->get();
         $checkCount = $check->count();
 
         if($checkCount <= 0){
@@ -98,7 +98,8 @@ class UsersController extends Controller
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
                 'contents' => Contents::select('id', 'template_id', 'caption', 'parent_id')->where('template_id', $template_id)->get(),
-                'files' => Files::select('id', 'content_id', 'path', 'year')->get()
+                'files' => Files::select('id', 'content_id', 'path', 'year')->get(),
+                'content_id' => $check->id
             ]);
 
         }else{
@@ -122,7 +123,8 @@ class UsersController extends Controller
             return view('users.content', [
                 'templates' => Templates::select('name', 'id')->where('id', $template_id)->first(),
                 'contents' => Contents::select('id', 'template_id', 'caption', 'parent_id')->where('template_id', $template_id)->get(),
-                'files' => Files::select('id', 'content_id', 'path', 'year')->get()
+                'files' => Files::select('id', 'content_id', 'path', 'year')->get(),
+                'content_id' => $content_id->id
             ]);
         }
     }
