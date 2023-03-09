@@ -25,7 +25,7 @@
         <div class="w-full lg:w-1/2 flex flex-col">
 
             <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-12">
-                <img class="w-14" src="https://th.bing.com/th/id/R.a2e5ca9ec6da8cb1ec1f1a47ee7105be?rik=MNQeIn1LXlRzqg&riu=http%3a%2f%2ffiles.softicons.com%2fdownload%2fculture-icons%2fsharingan-icons-1.5-by-harenome-razanajato%2fpng%2f512x512%2fkakashi.png&ehk=NCoOIVMXKMEcU6vp6WE8wX92zqNDrIEPKVSwc9dIzaA%3d&risl=&pid=ImgRaw&r=0" alt="icon">
+                <!-- <img class="w-14" src="https://th.bing.com/th/id/R.a2e5ca9ec6da8cb1ec1f1a47ee7105be?rik=MNQeIn1LXlRzqg&riu=http%3a%2f%2ffiles.softicons.com%2fdownload%2fculture-icons%2fsharingan-icons-1.5-by-harenome-razanajato%2fpng%2f512x512%2fkakashi.png&ehk=NCoOIVMXKMEcU6vp6WE8wX92zqNDrIEPKVSwc9dIzaA%3d&risl=&pid=ImgRaw&r=0" alt="icon"> -->
             </div>
 
             <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">

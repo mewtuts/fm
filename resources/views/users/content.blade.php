@@ -33,7 +33,7 @@
         .caret-down::before{
             transform: rotate(90deg);
         }
-        .show_addForm{
+        #show_addForm{
             display: none;
         }
     </style>
@@ -63,7 +63,7 @@
                                         <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
                                     </div>
                                 </form>
-                                <div class="cancel_addForm absolute text-red-900 mt-2 w-full p-1 cursor-pointer"><i class="bi bi-x"></i></div>
+                                <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full p-1 cursor-pointer"><i class="bi bi-x"></i></div>
                             </span>
                            
                             <!-- File Upload -->
@@ -83,9 +83,9 @@
                                         <li class="">
                                             <span class="caret text-xl">{{ $content->caption }}</span>
 
-                                            <span title="New Folder" class="addFolder cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                                            <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
 
-                                            <span class="show_addForm remove_form">
+                                            <span id="show_addForm" class="remove_form">
                                                 <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
                                                     <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
                                                     <div class="flex justify-between mt-2">
@@ -93,7 +93,7 @@
                                                     </div>
                                                 </form>
                                                 
-                                                <div class="cancel_addForm absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
+                                                <div id="cancel_addForm" class="absolute text-red-900 mt-2 w-full cursor-pointer"><i class="bi bi-x"></i></div>
                                             </span>
             
                                             <label class="cursor-pointer px-2 py-1 bg-white text-red-600 rounded text-sm" for="upload-file"><i class="bi bi-file-earmark"></i>
@@ -144,12 +144,12 @@
     <!-- JAVASCRIPT -->
     <script>
         $(document).ready(function() {
-            $(".addFolder").click(function() {
-                $(".show_addForm").fadeToggle();
+            $("#addFolder").click(function() {
+                $("#show_addForm").fadeToggle();
             });
         });
         $(document).ready(function() {
-            $(".cancel_addForm").click(function() {
+            $("#cancel_addForm").click(function() {
                 $(".remove_form").hide();
             });
         });
