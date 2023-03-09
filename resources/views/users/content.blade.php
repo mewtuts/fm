@@ -54,11 +54,11 @@
                 <div class="text-white p-2">
 
                     <ul id="ul" class="w-full">
-                        <li class=""><span class="caret text-xl mt-1">{{ $templates->name }}</span>
-                            <span title="New Folder" class="addFolder cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus font-black"></i></span>
-                            <span class="show_addForm remove_form">
-                                <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="h-24 absolute mt-3 bg-slate-200 px-2 py-6 rounded">@csrf
-                                    <input class="text-black" type="text" name="name_folder" class="rounded text-xs px-2" placeholder="Folder Name"required>
+                        <li class=""><span class="caret text-xl">{{ $templates->name }}</span>
+                            <span id="addFolder" title="New Folder" class="cursor-pointer ml-2 px-2 py-1 bg-white text-red-600 rounded text-sm"><i class="bi bi-folder-plus"></i></span>
+                            <span id="show_addForm" class="remove_form">
+                                <form action="{{ '/users/content/'.$templates->id.'/'.$templates->name.'/mkdir' }}" method="POST" class="absolute mt-3 bg-slate-200 p-2 rounded">@csrf
+                                    <input class="text-black" type="text" name="name_folder" class="mt-3 rounded" required>
                                     <div class="flex justify-between mt-2">
                                         <input type="submit" class="w-full cursor-pointer text-sm p-1 bg-blue-800 rounded">
                                     </div>
