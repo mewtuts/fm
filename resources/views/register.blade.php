@@ -9,31 +9,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <!-- TAILWINDCSS -->
     @vite('resources/css/app.css')
+    <!-- Inline CSS -->
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
         .font-family-karla {
             font-family: karla;
         }
+        .error{
+            padding-left: 5px;
+            color: red;
+        }
     </style>
 </head>
-<body class="bg-whitefont-family-karla h-screen">
-
-    <div class="w-full flex flex-wrap">
-
+<body class="">
+    <div class="w-screen h-screen bg-slate-50">
         <!-- Register Section -->
-        <div class="w-full lg:w-1/2 flex flex-col">
-
-            <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-12">
-                <!-- <img class="w-14" src="https://th.bing.com/th/id/R.a2e5ca9ec6da8cb1ec1f1a47ee7105be?rik=MNQeIn1LXlRzqg&riu=http%3a%2f%2ffiles.softicons.com%2fdownload%2fculture-icons%2fsharingan-icons-1.5-by-harenome-razanajato%2fpng%2f512x512%2fkakashi.png&ehk=NCoOIVMXKMEcU6vp6WE8wX92zqNDrIEPKVSwc9dIzaA%3d&risl=&pid=ImgRaw&r=0" alt="icon"> -->
-            </div>
-
-            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
-                <p class="text-center text-3xl">Join Us.</p>
-
-                <form class="flex flex-col pt-3 md:pt-8" action="{{ route('register') }}" method="POST">@csrf
-                    
+        <div class="w-full h-full flex justify-center items-center py-10 overflow-auto">
+            <div class="flex flex-col bg-slate-200 rounded-xl justify-center md:justify-start my-auto pt-8 md:pt-0 shadow-xl w-register-box">
+                <!-- <span class="left-10 m-5"><i class="bi bi-x-lg cursor-pointer"></i></span> -->
+                <p class="text-center text-green-800 text-4xl mt-10">Join Us.</p>
+                <form id="register_form" class="flex flex-col p-10 md:pt-8" action="{{ route('register') }}" method="POST">@csrf
                     @if ($errors->any())
                     <div class="flex flex-col pt-4 border-2 border-red-600 text-red-600 p-2 md:hiden lg:hidden xl:hidden">
                     <ul>
@@ -44,55 +41,56 @@
                     </div>
                     @endif
                     
-                    <div class="flex flex-col pt-4">
-                        <label for="id_number" class="text-lg">ID number</label>
-                        <input type="text" id="id_number" name="id_number" placeholder="your school ID number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col w-full">
+                        <label for="id_number" class="text-base text-zinc-800 px-1">ID number</label>
+                        <input type="text" id="id_number" name="id_number" placeholder="your school ID number" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50"/>
                     </div>
                     
-                    <div class="flex flex-col pt-4">
-                        <label for="first_name" class="text-lg">First name</label>
-                        <input type="text" id="first_name" name="first_name" placeholder="your first name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="first_name" class="text-base text-zinc-800 px-1">First name</label>
+                        <input type="text" id="first_name" name="first_name" placeholder="your first name" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50"/>
                     </div>
 
-                    <div class="flex flex-col pt-4">
-                        <label for="middle_name" class="text-lg">Middle name</label>
-                        <input type="text" id="middle_name" name="middle_name" placeholder="your middle name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="middle_name" class="text-base text-zinc-800 px-1">Middle name</label>
+                        <input type="text" id="middle_name" name="middle_name" placeholder="your middle name" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
 
-                    <div class="flex flex-col pt-4">
-                        <label for="last_name" class="text-lg">Last name</label>
-                        <input type="text" id="last_name" name="last_name" placeholder="your last name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="last_name" class="text-base text-zinc-800 px-1">Last name</label>
+                        <input type="text" id="last_name" name="last_name" placeholder="your last name" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
 
-                    <div class="flex flex-col pt-4">
-                        <label for="username" class="text-lg">Username</label>
-                        <input type="text" id="username" placeholder="your username" name="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="username" class="text-base text-zinc-800 px-1">Username</label>
+                        <input type="text" id="username" placeholder="your username" name="username" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
 
-                    <div class="flex flex-col pt-4">
-                        <label for="email" class="text-lg">Email</label>
-                        <input type="email" id="email" placeholder="your@email.com" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="email" class="text-base text-zinc-800 px-1">Email</label>
+                        <input type="email" id="email" placeholder="your@email.com" name="email" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
     
-                    <div class="flex flex-col pt-4">
-                        <label for="password" class="text-lg">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="password" class="text-base text-zinc-800 px-1">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
 
-                    <div class="flex flex-col pt-4">
-                        <label for="password" class="text-lg">Confirm Password</label>
-                        <input type="password" id="password" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    <div class="flex flex-col pt-4 w-full">
+                        <label for="password" class="text-base text-zinc-800 px-1">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="password" placeholder="Password" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
     
-                    <input type="submit" value="Register" name="register" class="bg-black text-white font-bold text-lg hover:bg-red-600 p-2 mt-8 rounded cursor-pointer"/>
+                    <input type="submit" value="Register" name="register" class="bg-green-800  text-slate-50 text-xl hover:bg-green-900 p-3 mt-10 rounded cursor-pointer"/>
+
+                    <div class="text-center text-lg p-5">
+                        @if(Session::has('message'))
+                            <p class="text-green-800">{{Session::get('message')}}<a class='underline font-semibold text-blue-600' href="{{ '/' }}">here </a>to login</p>
+                        @else
+                        <p>Already have an account? <a href="{{ '/' }}" class="hover:underline font-semibold text-lg text-green-800">Log in here.</a></p>
+                        @endif
+                    </div>
                 </form>
-                <div class="text-center pt-12 pb-12">
-                    @if(Session::has('message'))
-                        <p class="text-green-500">{{Session::get('message')}}<a class='underline font-semibold text-blue-600' href="{{ '/' }}">here </a>to login</p>
-                    @else
-                    <p>Already have an account? <a href="{{ '/' }}" class="hover:underline font-semibold">Log in here.</a></p>
-                    @endif
-                </div>
             </div>
 
         </div>
@@ -112,5 +110,67 @@
         </div>
     </div>
 
+    <!-- Jquery -->
+    <script>
+        $(document).ready(function(){
+            $("#register_form").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules : {
+                   id_number : {
+                        required: true,
+                   } ,
+                   first_name : {
+                        required: true,
+                   } ,
+                   middle_name : {
+                        required: true,
+                   } ,
+                   last_name : {
+                        required: true,
+                   } ,
+                   username : {
+                        required: true,
+                   } ,
+                   email : {
+                        required: true,
+                   } ,
+                   password : {
+                        required: true,
+                   } ,
+                   confirm_password : {
+                        required: true,
+                   } ,
+                },
+                messages : {
+                    id_number : {
+                        required: "Fill out this field",
+                   } ,
+                   first_name : {
+                        required: "Fill out this field",
+                   } ,
+                   middle_name : {
+                        required: "Fill out this field",
+                   } ,
+                   last_name : {
+                        required: "Fill out this field",
+                   } ,
+                   username : {
+                        required: "Fill out this field",
+                   } ,
+                   email : {
+                        required: "Fill out this field",
+                   } ,
+                   password : {
+                        required: "Fill out this field",
+                   } ,
+                   confirm_password : {
+                        required: "Fill out this field",
+                   } ,
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 </body>
 </html>
