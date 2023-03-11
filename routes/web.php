@@ -33,7 +33,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 //USERS LOGIN ROUTE
 Route::get('/users/home', function(){
     return view('users.home', [
-        'categories' => Category::get(),
+        'categories' => Category::whereNull('parent_id')->get(),
         'contents' => Contents::get()
     ]);
 });

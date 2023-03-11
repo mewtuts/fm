@@ -35,13 +35,15 @@
                         <i class="bi bi-plus-circle-fill text-green-800"></i>
                         <span class="ml-5 text-green-900">New Template</span>
                     </a>
+                </li>
+                <li class="rounded-xl" id="">
                     <!-- Form to create New Template -->
                     <form action="{{ route('create_parent_category') }}" class="p-3 bg-slate-200 rounded mt-5 relative hidden" id="showTemplateForm" method="POST">@csrf
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
                         <!-- Buttons -->
-                        <div class="flex items-center justify-between mt-3">
-                            <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-6/12 rounded-lg p-3 mr-2 text-lg cursor-pointer">
-                            <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back">
+                        <div class="flex justify-end mt-3">
+                            <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer">
+                            {{-- <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back"> --}}
                         </div>
                     </form>
                 </li>
@@ -65,7 +67,8 @@
             </div> -->
             <!-- Templates -->
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 mb-4">
-            @foreach ($categories as $category)  
+            @foreach ($categories as $category)
+                @if (Session::get('user_id') == $category->user_id)
                     <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
                         <p class="text-5xl text-orange-300">
                             <i class="bi bi-folder-fill"></i>
@@ -74,6 +77,7 @@
                             {{ $category->title }}
                         </p>
                     </div>
+                @endif
             @endforeach 
             </div>
         </div>
@@ -82,7 +86,7 @@
     <script>
         $(document).ready(function(){
             $("#showTemplate").click(function(){
-                $("#showTemplateForm").show();
+                $("#showTemplateForm").toggle(200);
             });
             $("#hideTemplate").click(function(){
                 $("#showTemplateForm").hide();
