@@ -2,57 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User Home Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <title>Templates</title>
     <style>
-        #subff{
-            display: none;
-        }
     </style>
 </head>
-<body class="bg-black font-mono sm:2xl md:text-3xl lg:4xl xl:5xl">
-   
-    <div> <!-- NAVIGATION CONTAINER -->
-        <!-- <div class="grid place-items-center p-3 bg-black">
-            <img class="w-14" src="https://i.pinimg.com/originals/cf/08/5d/cf085de99662fc50d8bc78adb47cc596.gif" alt="icon">
-        </div> -->
-        <nav class="bg-black text-red-600 ">
-            <ul class="grid grid-cols-2 px-5 py-2">
-                <li>Welcome  {{ Session::get('username') }}</li>
-                <li class="text-right hover:underline"><a href="{{ 'logout' }}">Logout</a></li>
+<body class="font-poppins bg-slate-50">  
+    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 outline-none focus:ring-2 focus:bg-green-800 focus:text-white">
+        <span class="sr-only">Open sidebar</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+        </svg>
+    </button>
+
+    <!-- Side Bar -->
+    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-80 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <div class="h-full px-5 py-4 overflow-y-auto bg-green-800">
+            <!-- Logo -->
+            <a href="#" class="flex items-center mb-5 mt-2">
+                <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i>
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-slate-50">File Management</span>
+            </a>
+            <ul class="space-y-2 mt-10">
+                <li class="rounded-xl" id="showTemplate">
+                    <a href="#" class="flex items-center p-4 text-xl font-medium rounded-lg bg-slate-100">
+                        <i class="bi bi-plus-circle-fill text-green-800"></i>
+                        <span class="ml-5 text-green-900">New Template</span>
+                    </a>
+                    <!-- Form to create New Template -->
+                    <form action="{{ route('create_parent_category') }}" class="p-3 bg-slate-200 rounded mt-5 relative hidden" id="showTemplateForm" method="POST">@csrf
+                        <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
+                        <!-- Buttons -->
+                        <div class="flex items-center justify-between mt-3">
+                            <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-6/12 rounded-lg p-3 mr-2 text-lg cursor-pointer">
+                            <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back">
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <a href="{{ 'logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
+                        <i class="bi bi-box-arrow-left text-xl"></i>
+                        <span class="flex-1 ml-5 whitespace-nowrap">Sign Out</span>
+                    </a>
+                </li>
             </ul>
-        </nav>
-    </div><!-- END NAVIGATION CONTAINER -->
+        </div>
+    </aside>
 
-    <!-- MENU CONTAINER -->
-    <div class=" text-red-600 px-5 my-2"> 
-        <form class="bg-red-600 text-black p-2 grid grid-cols-2 gap-4" action="{{ route('template') }}" method="POST">@csrf
-            <input class="bg-gray-100 text-black text-center lg:p-6" type="name" placeholder="Template Name" name="name" required>
-            <input class="bg-black text-red-600 cursor-pointer" type="submit" name="submit" value="Create Template" required>
-        </form>
+    <!-- Content -->
+    <div class="p-4 sm:ml-80">
+        <div class="p-4 rounded-lg">
+            <h1 class="text-zinc-600 pb-4 ml-2 text-2xl">Parent Folder</h1>
+            <!-- Search Input -->
+            <!-- <div class="grid grid-cols-1 mb-4">
+                <input type="search" placeholder="Search template" class="rounded focus:outline-green-800 outline-none">
+            </div> -->
+            <!-- Templates -->
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 mb-4">
+            @foreach ($categories as $category)  
+                    <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
+                        <p class="text-5xl text-orange-300">
+                            <i class="bi bi-folder-fill"></i>
+                        </p>
+                        <p class="mt-10 text-xl text-center">
+                            {{ $category->title }}
+                        </p>
+                    </div>
+            @endforeach 
+            </div>
+        </div>
     </div>
-   
-    <div class="px-5 py-2 text-white font-semibold max-h-screen h-screen overflow-auto bg-cover bg-no-repeat" style="background-image: url(https://media1.tenor.com/images/7ee68785e912300b89900a6243419f3b/tenor.gif?itemid=16101554)"> <!-- SHOW CONTAINER -->
-        <ul class="grid grid-cols-1 text-center lg:grid-cols-3 sm:grid-cols-2 gap-4">
-           
-            @foreach ($templates as $template)
-            <li class="bg-red-700 shadow-xl mb-2"><a class="" href="{{ '/users/content/'.$template->id }}"><img class="md:w-screen" src="https://cdn-icons-png.flaticon.com/512/9218/9218289.png" alt="Folder Icon">{{ $template->name  }}</a>
-            </li>  
-            @endforeach
 
-        </ul> 
-    </div>
+    <script>
+        $(document).ready(function(){
+            $("#showTemplate").click(function(){
+                $("#showTemplateForm").show();
+            });
+            $("#hideTemplate").click(function(){
+                $("#showTemplateForm").hide();
+            });
+        });
+    </script>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <!-- Jquery Validate Plugin  -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 </body>
 </html>
-
-<script>
-$(document).ready(function() {
-    $("#dropdown").click(function() {
-        $("#subff").fadeToggle(1000);
-    });
-});
-</script>

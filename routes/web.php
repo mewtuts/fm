@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Contents;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UsersController;
@@ -29,11 +31,16 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
  
 
 //USERS LOGIN ROUTE
-Route::get('/users/home', [UsersController::class, 'templates'])->name('templates');
+Route::get('/users/home', function(){
+    return view('users.home', [
+        'categories' => Category::get(),
+        'contents' => Contents::get()
+    ]);
+});
 
 Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
 
-Route::post('/users/home', [UsersController::class, 'template'])->name('template');
+Route::post('/users/home', [UsersController::class, 'create_parent_category'])->name('create_parent_category');
 
 Route::get('/users/content/{template_id}', [UsersController::class, 'content']);
 

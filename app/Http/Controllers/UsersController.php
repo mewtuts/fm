@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contents;
+use App\Models\Category;
 use App\Models\Files;
 use App\Models\Templates;
 use Illuminate\Contracts\Session\Session;
@@ -14,34 +15,24 @@ use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class UsersController extends Controller
 {
-    public function template(Request $request){
+    public function create_parent_category(Request $request){
         $request->validate([
-            'name' => 'required|alpha_dash|unique:templates'
+            'title' => 'required|alpha_dash|unique:categories'
         ]);
 
         $user_id = FacadesSession::get('user_id');
 
-        $request->validate([
-            'name' => 'required|alpha_dash|unique:templates'
-        ]);
-
-        $template = new Templates();
-        $template->name = $request->name;
-        $template->user_id = $user_id;
-        $template->save();
+        $category = new Category();
+        $category->title = $request->title;
+        $category->user_id = $user_id;
+        $category->save();
         
         //getting the lates row in Contents Table
-        $template = Templates::select('id')->latest('created_at')->first();
-
-        $contents = new Contents();
-        $contents->caption = $request->name;
-        $contents->template_id = $template->id;
-        $contents->user_id = $user_id;
-        $contents->save();
+        $category = Category::select('id')->latest('created_at')->first();
         
-        Storage::disk('local')->makeDirectory($user_id.'_'.$request->name);
+        Storage::disk('local')->makeDirectory($user_id.$request->title);
 
-        return redirect(route('templates'))->with('successs', 'Template created success!');
+        return redirect('/users/home');
 
     }
 
@@ -55,13 +46,6 @@ class UsersController extends Controller
         session()->getHandler()->destroy('email');
        
         return view('login')->with('Success message');
-    }
-
-    public function templates(){
-        return view('users.home', [
-            'templates' => Templates::get(),
-            'contents' => Contents::get()
-        ]);
     }
 
     public function content($template_id){  
