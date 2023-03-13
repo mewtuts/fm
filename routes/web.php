@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Models\Contents;
 use App\Http\Controllers\LoginController;
@@ -37,6 +38,8 @@ Route::get('/users/home', function(){
         'contents' => Contents::get()
     ]);
 });
+
+Route::get('/users/file/{category_id}', [CategoryController::class, 'file']);
 
 Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
 

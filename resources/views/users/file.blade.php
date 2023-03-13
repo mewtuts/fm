@@ -12,7 +12,7 @@
 </head>
 <body class="bg-slate-50">
     <header class="bg-slate-100 h-20 flex">
-        <a href="#" class="flex items-center p-4" title="Home">
+        <a href="{{ '/users/home' }}" class="flex items-center p-4" title="Home">
             <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i>
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-green-800">File Management</span>
         </a>
