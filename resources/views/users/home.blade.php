@@ -42,8 +42,8 @@
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
                         <!-- Buttons -->
                         <div class="flex justify-end mt-3">
-                            <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer">
-                            {{-- <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back"> --}}
+                            <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-full rounded-lg p-3 text-lg cursor-pointer">
+                            <!-- {{-- <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back"> --}} -->
                         </div>
                     </form>
                 </li>
@@ -67,18 +67,31 @@
             </div> -->
             <!-- Templates -->
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 mb-4">
-            @foreach ($categories as $category)
-                @if (Session::get('user_id') == $category->user_id)
-                    <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
-                        <p class="text-5xl text-orange-300">
-                            <i class="bi bi-folder-fill"></i>
-                        </p>
-                        <p class="mt-10 text-xl text-center">
-                            {{ $category->title }}
-                        </p>
+                @if ($categories->isEmpty())
+                    <!-- Condition when no template has been created -->
+                    <div class="w-full h-96 flex items-center justify-center">
+                        <h1 class="text-3xl text-zinc-600">No Template Created</h1>
                     </div>
+                    <!-- Content when template have created -->
+                @else
+                    @foreach ($categories as $category)
+                        @if (Session::get('user_id') == $category->user_id)
+                            <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
+                                <div class="w-full p-5 flex justify-end">
+                                    <a href="" class="cursor-pointer bg-yellow-400 py-1.5 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-2xl text-slate-100 p-2"></i></a>
+                                    <a href="" class="cursor-pointer bg-red-500 py-1.5 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-2xl text-slate-100 p-2"></i></a>
+                                </div>
+                                    <p class="text-5xl mb-10 mt-5 text-orange-300">
+                                        <i class="bi bi-folder-fill"></i>
+                                    </p>
+                                        <!-- Update New Name -->
+                                    <a href="" class="text-xl text-center mb-10" contenteditable="true">
+                                        {{ $category->title }} 
+                                    </a>
+                                </div>
+                        @endif
+                    @endforeach 
                 @endif
-            @endforeach 
             </div>
         </div>
     </div>
