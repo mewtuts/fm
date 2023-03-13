@@ -123,6 +123,7 @@ class UsersController extends Controller
         $user_id = FacadesSession::get('user_id');
 
         $contents = Contents::select('template_id', 'caption')->where('id', $content_id)->first();
+        
         $templates = Templates::select('id', 'name')->where('id', $contents->template_id)->first();
 
         $filename = $request->file('file')->getClientOriginalName();

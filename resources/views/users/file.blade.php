@@ -34,6 +34,11 @@
                             <input type="text" placeholder="Folder Name" class="w-full p-3 rounded">
                             <select name="" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
                                 <option value="" selected disabled>Specify where the folder will locate</option>
+                                @foreach ($categories as $category)
+                           
+                                    <x-select-category :category="$category" />
+    
+                                @endforeach
                             </select>
                             <input type="submit" value="Create Folder" class="w-full bg-green-800 hover:bg-green-900 text-white text-xl p-3 mt-7 rounded cursor-pointer">
                         </form>
@@ -61,6 +66,11 @@
                         </label>
                         <select name="" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
                             <option value="" selected disabled>Specify where the file will locate</option>
+                            @foreach ($categories as $category)
+                       
+                                <x-select-category :category="$category" />
+
+                            @endforeach
                         </select>
                         <input type="submit" value="Upload File" class="w-full bg-green-800 hover:bg-green-900 text-white text-xl p-3 mt-7 rounded cursor-pointer">
                     </form>
@@ -79,48 +89,12 @@
                     <a href="#"><i class="bi bi-trash3-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
                 </form>
             </div>
-            <div class="mt-5">
-                <div class="w-full rounded cursor-pointer mb-5 grid xl:grid-cols-5 lg:grid-col-4 gap-10">
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-                    <div class="bg-slate-100 hover:bg-slate-200 py-4 pr-10 pl-2 rounded">
-                        <i class="bi bi-caret-right-fill text-xl text-zinc-700 mr-3"></i>
-                        <i class="bi bi-folder-fill text-orange-300 text-2xl"></i>
-                        <span class="ml-2 text-xl text-zinc-700">Folder 1</span>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
+    
+        @foreach ($categories as $category)
+            <x-sub-category :category="$category" />
+        @endforeach    
 
     <!-- Jquery -->
     <script>

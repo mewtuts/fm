@@ -38,7 +38,7 @@
                 </li>
                 <li class="rounded-xl" id="">
                     <!-- Form to create New Template -->
-                    <form action="{{ route('create_parent_category') }}" class="p-3 bg-slate-200 rounded mt-5 relative hidden" id="showTemplateForm" method="POST">@csrf
+                    <form action="{{ 'addTemplate' }}" class="p-3 bg-slate-200 rounded mt-5 relative hidden" id="showTemplateForm" method="POST">@csrf
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
                         <!-- Buttons -->
                         <div class="flex justify-end mt-3">
@@ -67,19 +67,19 @@
             </div> -->
             <!-- Templates -->
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 mb-4">
-                @if ($categories->isEmpty())
+                @if ($templates->isEmpty())
                     <!-- Condition when no template has been created -->
                     <div class="w-full h-96 flex items-center justify-center">
                         <h1 class="text-3xl text-zinc-600">No Template Created</h1>
                     </div>
                     <!-- Content when template have created -->
                 @else
-                    @foreach ($categories as $category)
-                        @if (Session::get('user_id') == $category->user_id)
+                    @foreach ($templates as $template)
+                        @if (Session::get('user_id') == $template->user_id)
                             <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
-                                        <a href="{{ '/users/file/'.$category->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
+                                        <a href="{{ '/users/file/'.$template->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
                                     </div>
                                     <div>
                                         <a href="" class="cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
@@ -91,7 +91,7 @@
                                     </p>
                                         <!-- Update New Name -->
                                     <a href="" class="text-xl text-center mb-10" contenteditable="true">
-                                        {{ $category->title }} 
+                                        {{ $template->title }} 
                                     </a>
                                 </div>
                         @endif

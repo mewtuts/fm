@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use App\Models\Contents;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TemplatesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UsersController;
 use App\Models\Templates;
@@ -31,19 +32,29 @@ Route::post('/register/store', [RegisterController::class, 'register'])->name('r
 Route::post('/login', [LoginController::class, 'login'])->name('login');
  
 
-//USERS LOGIN ROUTE
+//route for user home page
 Route::get('/users/home', function(){
     return view('users.home', [
-        'categories' => Category::whereNull('parent_id')->get(),
-        'contents' => Contents::get()
+        'templates' => Templates::get()
     ]);
 });
 
-Route::get('/users/file/{category_id}', [CategoryController::class, 'file']);
+//route for adding template
+Route::post('/users/addTemplate', [TemplatesController::class, 'addTemplate']);
+
+//route for viewing file page
+Route::get('/users/file/{template_id}', [CategoryController::class, 'file']);
+
+
+
+
+
+
+
 
 Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
 
-Route::post('/users/home', [UsersController::class, 'create_parent_category'])->name('create_parent_category');
+Route::post('/users/home', [CategoryController::class, 'addParentFolder'])->name('addParentFolder');
 
 Route::get('/users/content/{template_id}', [UsersController::class, 'content']);
 
