@@ -85,7 +85,7 @@
 
                     <div class="text-center text-lg p-5">
                         @if(Session::has('message'))
-                            <p class="text-green-800">{{Session::get('message')}}<a class='underline font-semibold text-blue-600' href="{{ '/' }}">here </a>to login</p>
+                            <p class="text-green-800">{{Session::get('message')}}<a class='font-semibold text-blue-800 hover:text-blue-900 hover:underline' href="{{ '/' }}">here </a>to login</p>
                         @else
                         <p>Already have an account? <a href="{{ '/' }}" class="hover:underline font-semibold text-lg text-green-800">Log in here.</a></p>
                         @endif
