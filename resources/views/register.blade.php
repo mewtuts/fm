@@ -75,10 +75,26 @@
                         <label for="password" class="text-base text-zinc-800 px-1">Password</label>
                         <input type="password" id="password" name="password" placeholder="Password" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
+                    <!-- Show Password | Password -->
+                    <div class="flex justify-between pt-4">
+                        <div></div>
+                        <div>
+                            <input type="checkbox" id="password_showPassword" class="cursor-pointer" onclick="passwordFunction()">
+                            <label for="password_showPassword" class="cursor-pointer">Show Password</label>
+                        </div>
+                    </div>
 
                     <div class="flex flex-col pt-4 w-full">
-                        <label for="password" class="text-base text-zinc-800 px-1">Confirm Password</label>
+                        <label for="confirm_password" class="text-base text-zinc-800 px-1">Confirm Password</label>
                         <input type="password" id="confirm_password" name="password" placeholder="Password" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
+                    </div>
+                    <!-- Show Password | Confirm Password-->
+                    <div class="flex justify-between pt-4">
+                        <div></div>
+                        <div>
+                            <input type="checkbox" id="confirmPassword_showPassword" class="cursor-pointer" onclick="confirmPasswordFunction()">
+                            <label for="confirmPassword_showPassword" class="cursor-pointer">Show Password</label>
+                        </div>
                     </div>
     
                     <input type="submit" value="Register" name="register" class="bg-green-800  text-slate-50 text-xl hover:bg-green-900 p-3 mt-10 rounded cursor-pointer"/>
@@ -170,6 +186,26 @@
                 }
             });
         });
+
+        // Hide and Show Password | Password
+        function passwordFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+        
+        // Hide and Show Password | Confirm Password
+        function confirmPasswordFunction() {
+            var x = document.getElementById("confirm_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 </body>
