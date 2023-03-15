@@ -29,7 +29,7 @@
                         <button>Create Folder</button>
                     </div>
                     <!-- Form to Create Folder -->
-                    <div class="mt-5 hidden absolute" id="showFolderForm">
+                    <div class="mt-5 hidden" id="showFolderForm">
                         <form action="" class="px-10 py-10 bg-slate-200 rounded">
                             <input type="text" placeholder="Folder Name" class="w-full p-3 rounded">
                             <select name="" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
@@ -53,14 +53,13 @@
                     <button>Upload File</button>
                 </div>
                 <!-- Form to Upload File -->
-                <div class="mt-5 hidden absolute" id="showUploadFile">
+                <div class="mt-5 hidden" id="showUploadFile">
                     <form action="" class="px-10 py-10 bg-slate-200 rounded">
                         <!-- Uploading -->
                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-green-800">
                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                             </div>
                             <input id="dropzone-file" type="file" class="hidden" />
                         </label>
@@ -98,16 +97,19 @@
 
     <!-- Jquery -->
     <script>
+
+        // Toggle Folder
         $(document).ready(function(){
             $("#createFolder").click(function(){
-                $("#showFolderForm").toggle();
+                $("#showFolderForm").toggle(500);
             })
         });
         $(document).ready(function(){
             $("#uploadFile").click(function(){
-                $("#showUploadFile").toggle();
+                $("#showUploadFile").toggle(500);
             })
         });
+        
     </script>
 
     <!-- Flowbite JS -->

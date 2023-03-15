@@ -14,6 +14,9 @@
     @vite('resources/css/app.css')
     <!-- Inline CSS -->
     <style> 
+        /* body{
+            background-image: url(" {{ url('image/wave.svg') }} " );
+        } */
         .error{
             color: red;
             padding-left: 5px;
