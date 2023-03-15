@@ -7,7 +7,7 @@
         {{ $category->title }} ({{ $category->id }})
     </div>
     @foreach ($category->getFiles as $file)
-        <div class='ml-3'> file: {{ $file->file_name }} </div> 
+        <div class='ml-3 hover:text-blue-800 hover:underline'><a href="https://docs.google.com/gview?url={{ asset("storage/app/".$category->title.Session::get('user_id')."/".$file->file_name.".".$file->file_type) }}&embedded=true" target="_blank"> file: {{ $file->file_name }}</a></div> 
     @endforeach
     
     @foreach ($category->children as $child)

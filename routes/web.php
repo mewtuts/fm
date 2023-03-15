@@ -45,6 +45,31 @@ Route::post('/users/addTemplate', [TemplatesController::class, 'addTemplate']);
 //route for viewing file page
 Route::get('/users/file/{template_id}', [CategoryController::class, 'file']);
 
+//route for storing sub parent folder
+Route::post('/users/storeSubParent', [CategoryController::class, 'storeSubParent'])->name('storeSubParent');
+
+//route for uploading file
+Route::post('/users/uploadFile', [CategoryController::class, 'uploadFile'])->name('uploadFile');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
