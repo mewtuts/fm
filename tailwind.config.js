@@ -22,6 +22,8 @@ module.exports = {
 
         'fl-sm': {'max': '639px'},
         // => @media (max-width: 639px) { ... }
+        'fl-xsm': {'max': '400px'},
+        // => @media (max-width: 639px) { ... }
       },
       fontFamily : {
         'poppins' : ['poppins'],
