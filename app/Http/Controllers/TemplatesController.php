@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Storage;
 class TemplatesController extends Controller
 {
     public function addTemplate(Request $request){
+       
         $request->validate([
-            'title' => 'required|alpha_dash|unique:templates'
+            'title' => 'required|regex:/^[a-zA-Z\s]+$/'
         ]);
 
         $user_id = FacadesSession::get('user_id');

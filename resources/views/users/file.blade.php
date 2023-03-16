@@ -86,6 +86,9 @@
                 <form action="">
                     <a href="#"><i class="bi bi-pencil-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
                     <a href="#"><i class="bi bi-trash3-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
+
+
+                    
                 </form>
             </div>
         </div>

@@ -69,7 +69,7 @@
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 mb-4">
                 @if ($templates->isEmpty())
                     <!-- Condition when no template has been created -->
-                    <div class="w-full h-96 flex items-center justify-center">
+                    <div class=" ml-2 absolute text-center">
                         <h1 class="text-3xl text-zinc-600">No Template Created</h1>
                     </div>
                     <!-- Content when template have created -->
@@ -100,6 +100,13 @@
             </div>
         </div>
     </div>
+
+<!--Error Messages-->
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <script>alert('something went wrong')</script>
+    @endforeach
+@endif
 
     <script>
         $(document).ready(function(){
