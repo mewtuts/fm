@@ -36,7 +36,7 @@ class CategoryController extends Controller
 
     public function addParentFolder(Request $request){
         $request->validate([
-            'title' => 'required|alpha_dash|unique:categories'
+            'title' => 'required'
         ]);
 
         $user_id = FacadesSession::get('user_id');
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     public function storeSubParent(Request $request){
         //validation for request input.
         $request->validate([
-            'title' => 'required|alpha_dash|unique:categories'
+            'title' => 'required'
         ]);
 
         //getting the user id from session
@@ -92,7 +92,7 @@ class CategoryController extends Controller
 
     //method for uploading file
     public function uploadFile(Request $request){
-     
+        //dd($request);
         $request->validate([
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:204800',
             'parent_id' => 'required'
@@ -106,7 +106,7 @@ class CategoryController extends Controller
 
         //getting the parent title, id and user id
         $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
-
+       
         //Storing the file name
         $uploaded_file = $request->file->getClientOriginalName();
         $file_name = pathinfo($uploaded_file,PATHINFO_FILENAME);
@@ -119,7 +119,7 @@ class CategoryController extends Controller
 
         //Storing file path and uploading the file
         $file_path = storage_path($parent_category->title.$user_id);
-
+       
         $file = new Files();
         $file->category_id = $request->parent_id;
         $file->file_name = $file_name;
@@ -128,11 +128,32 @@ class CategoryController extends Controller
         $file->file_path = $file_path;
         $file->save();
 
-        $request->file('file')->storeAs($parent_category->title.$user_id, $file_name.".".$file_type);
-
+        //$request->file('file')->storeAs($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
+        $request->file->move($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
+        
         return redirect()->back()->with('success', 'succesfully upload file');
     }
 
 
+    //method for showing the content of selected file
+    public function viewFile(Request $request, $file_id){
+        $files = Files::find($file_id)->get();
+       
+        return view('users.viewFile', compact('files'));
+    }
+
+
+    //method for downloading the uploaded file
+    public function downloadFile($folder, $file_id){
+        
+        $file = Files::select('id','category_id','file_name','file_type','file_size','file_path')->where('id', $file_id)->first();
+    
+        //getting the user id from session
+        $user_id = FacadesSession::get('user_id');
+        $path = '/'.$folder.'/'.$file->file_name.'_'.$user_id.'.'.$file->file_type;
+
+        return response()->download(public_path($path));
+
+    }
 
 }

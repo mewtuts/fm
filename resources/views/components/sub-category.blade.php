@@ -11,7 +11,12 @@
 
     <!--Uploaded files-->
     @foreach ($category->getFiles as $file)
-        <div class='ml-3 hover:text-blue-800 hover:underline'><a href="https://docs.google.com/gview?url={{ asset("storage/app/".$category->title.Session::get('user_id')."/".$file->file_name.".".$file->file_type) }}&embedded=true" target="_blank"> file: {{ $file->file_name }}</a></div> 
+
+        <div class='ml-3 hover:text-blue-800 hover:underline'><a href="{{ '/users/downloadFile/'. $category->title  .'/'.  $file->id }}"> {{ $file->file_name }} </a> </div>
+
+        {{-- <div class='ml-3 hover:text-blue-800 hover:underline'><a href="{{ '/users/viewFile/'.$file->id }}"> {{ $file->file_name }}</a></div>  --}}
+
+        <!-- <div class='ml-3 hover:text-blue-800 hover:underline'><a href="https://docs.google.com/gview?url={{ asset("storage/app/".$category->title."/".$file->file_name.'_'.Session::get('user_id').".".$file->file_type) }}&embedded=true" target="_blank"> file: {{ $file->file_name }}</a></div>  -->
     @endforeach
     <!--END Uploaded files-->
 
