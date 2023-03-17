@@ -24,6 +24,7 @@
     </style>
 </head>
 <body>
+  
     <div class="w-screen h-screen bg-slate-50">
         <!-- Login Section -->
         <div class="w-full h-full flex justify-center items-center">

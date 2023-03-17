@@ -35,10 +35,17 @@ class LoginController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->getHandler()->destroy('username');
+        $request->session()->forget('user_id');
+        $request->session()->forget('username');
+        $request->session()->forget('id_number');
+        $request->session()->forget('first_name');
+        $request->session()->forget('middle_name');
+        $request->session()->forget('last_name');
+        $request->session()->forget('email');
+        $request->session()->forget('template_id');
+
         return view('login');
-    
     }
 }

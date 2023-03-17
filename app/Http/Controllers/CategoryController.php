@@ -12,11 +12,11 @@ class CategoryController extends Controller
 {
 
     public function file($template_id){
-        
+
         $category_id = Category::select('id')->where('template_id', $template_id)->first();
-        
+
         $category = Category::find($category_id->id);
-       
+
         $category_ids = $category->getDescendants($category);
 
         $categories = Category::tree()
@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
 
     public function addParentFolder(Request $request){
-        
+
         $request->validate([
             'title' => 'required'
         ]);
@@ -46,10 +46,10 @@ class CategoryController extends Controller
         $category->title = $request->title;
         $category->user_id = $user_id;
         $category->save();
-        
+
         //getting the lates row in Contents Table
         $category = Category::select('id')->latest('created_at')->first();
-        
+
         //Storage::disk('local')->makeDirectory($request->title);
 
         return redirect()->back();
@@ -71,7 +71,7 @@ class CategoryController extends Controller
 
         //getting the parent title, id and user id
         $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
-    
+
         //getting the latest row in Contents Table
         $category_latest_id = Category::select('id')->latest('created_at')->first();
 
@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $category->title = $request->title;
         $category->parent_id = $request->parent_id;
         $category->save();
-        
+
         //making a directory folder in local directory path 'storage/app'
         //Storage::disk('local')->makeDirectory($request->title, '');
 
@@ -107,7 +107,7 @@ class CategoryController extends Controller
 
         //getting the parent title, id and user id
         $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
-       
+
         //Storing the file name
         $uploaded_file = $request->file->getClientOriginalName();
         $file_name = pathinfo($uploaded_file,PATHINFO_FILENAME);
@@ -120,7 +120,7 @@ class CategoryController extends Controller
 
         //Storing file path and uploading the file
         $file_path = storage_path($parent_category->title.$user_id);
-       
+
         $file = new Files();
         $file->category_id = $request->parent_id;
         $file->file_name = $file_name;
@@ -131,7 +131,7 @@ class CategoryController extends Controller
 
         //$request->file('file')->storeAs($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
         $request->file->move($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
-        
+
         return redirect()->back()->with('success', 'succesfully upload file');
     }
 
@@ -139,16 +139,16 @@ class CategoryController extends Controller
     //method for showing the content of selected file
     public function viewFile(Request $request, $file_id){
         $files = Files::find($file_id)->get();
-       
+
         return view('users.viewFile', compact('files'));
     }
 
 
     //method for downloading the uploaded file
     public function downloadFile($folder, $file_id){
-        
+
         $file = Files::select('id','category_id','file_name','file_type','file_size','file_path')->where('id', $file_id)->first();
-    
+
         //getting the user id from session
         $user_id = FacadesSession::get('user_id');
         $path = '/'.$folder.'/'.$file->file_name.'_'.$user_id.'.'.$file->file_type;

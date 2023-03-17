@@ -13,7 +13,7 @@
         /* Inline CSS */
     </style>
 </head>
-<body class="font-poppins bg-slate-50">  
+<body class="font-poppins bg-slate-50">
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 outline-none focus:ring-2 focus:bg-green-800 focus:text-white">
         <span class="sr-only">Open sidebar</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
                     </form>
                 </li>
                 <li>
-                    <a href="{{ 'logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
+                    <a href="{{ '/users/logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
                         <i class="bi bi-box-arrow-left text-xl"></i>
                         <span class="flex-1 ml-5 whitespace-nowrap">Sign Out</span>
                     </a>
@@ -82,8 +82,11 @@
                                         <a href="{{ '/users/file/'.$template->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
                                     </div>
                                     <div>
-                                        <a href="" class="cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
-                                        <a href="" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
+                                        <!--Edit icon-->
+                                        <a href="#edit" class="cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
+
+                                        <!--Delete icon-->
+                                        <a href="{{ '/users/delete_template/'.$template->id }}" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
                                     </div>
                                 </div>
                                     <p class="text-5xl mb-10 mt-5 text-orange-300">
@@ -91,11 +94,11 @@
                                     </p>
                                         <!-- Update New Name -->
                                     <a href="" class="text-xl text-center mb-10" contenteditable="true">
-                                        {{ $template->title }} 
+                                        {{ $template->title }}
                                     </a>
                                 </div>
                         @endif
-                    @endforeach 
+                    @endforeach
                 @endif
             </div>
         </div>

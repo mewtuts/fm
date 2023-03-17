@@ -30,7 +30,7 @@ Route::get('/register', function () {
 
 Route::post('/register/store', [RegisterController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
- 
+
 
 //route for user home page
 Route::get('/users/home', function(){
@@ -57,6 +57,11 @@ Route::get('/users/viewFile/{file_id}', [CategoryController::class, 'viewFile'])
 //route for downloading the uploaded file
 Route::get('/users/downloadFile/{folder}/{file_id}', [CategoryController::class, 'downloadFile']);
 
+//route for logout
+Route::get('/users/logout', [LoginController::class, 'logout']);
+
+//route for delete template
+Route::get('/users/delete_template/{template_id}', [TemplatesController::class, 'delete_template']);
 
 
 
@@ -80,9 +85,6 @@ Route::get('/users/downloadFile/{folder}/{file_id}', [CategoryController::class,
 
 
 
-
-
-Route::get('/users/logout', [UsersController::class, 'logout'])->name('logout');
 
 Route::post('/users/home', [CategoryController::class, 'addParentFolder'])->name('addParentFolder');
 
