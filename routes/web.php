@@ -52,7 +52,7 @@ Route::post('/users/storeSubParent', [CategoryController::class, 'storeSubParent
 Route::post('/users/uploadFile', [CategoryController::class, 'uploadFile'])->name('uploadFile');
 
 //route for viewing the uploaded file
-Route::get('/users/viewFile/{file_id}', [CategoryController::class, 'viewFile']);
+Route::get('/users/viewFile/{title}/{file_id}', [CategoryController::class, 'viewFile']);
 
 //route for downloading the uploaded file
 Route::get('/users/downloadFile/{folder}/{file_id}', [CategoryController::class, 'downloadFile']);

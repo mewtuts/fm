@@ -18,8 +18,9 @@
             @else
                 <i class="bi bi-file-earmark-fill text-green-800 text-xl pr-2"></i>
             @endif
-            
-            <a title="Download" ref="{{ '/users/downloadFile/'. $category->title  .'/'.  $file->id }}"> {{ $file->file_name }} </a> 
+
+            <a href="{{ '/users/viewFile/'.$category->title.'/'.$file->id }}" target="_blank"> {{ $file->file_name }}</a>
+            {{-- <a title="Download" ref="{{ '/users/downloadFile/'. $category->title  .'/'.  $file->id }}"> {{ $file->file_name }} </a>  --}}
         </div>
 
         <!-- {{-- <div class='ml-3 hover:text-blue-800 hover:underline'><a href="{{ '/users/viewFile/'.$file->id }}"> {{ $file->file_name }}</a></div>  --}} -->
@@ -34,9 +35,9 @@
         <div class="ml-7">
 
             <x-sub-category :category="$child" />
-                    
+
         </div>
-                
+
     @endforeach
     <!--END Sub folder-->
 

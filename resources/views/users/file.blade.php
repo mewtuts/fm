@@ -35,9 +35,9 @@
                             <select name="parent_id" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
                                 <option value="" selected disabled>Specify where the folder will locate</option>
                                 @foreach ($categories as $category)
-                           
+
                                     <x-select-category :category="$category" />
-    
+
                                 @endforeach
                             </select>
                             <input type="submit" value="Create Folder" class="w-full bg-green-800 hover:bg-green-900 text-white text-xl p-3 mt-7 rounded cursor-pointer">
@@ -66,7 +66,7 @@
                         <select name="parent_id" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
                             <option value="" selected disabled>Specify where the file will locate</option>
                             @foreach ($categories as $category)
-                       
+
                                 <x-select-category :category="$category" />
 
                             @endforeach
@@ -77,7 +77,7 @@
             </div>
             </div>
 
-           
+
         </div>
         <!-- Created Folder and Upload File Here... -->
         <div class="p-5">
@@ -88,15 +88,15 @@
                     <a href="#"><i class="bi bi-trash3-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
 
 
-                    
+
                 </form>
             </div>
         </div>
     </div>
-    
+
         @foreach ($categories as $category)
             <x-sub-category :category="$category" />
-        @endforeach    
+        @endforeach
 
     <!-- Jquery -->
     <script>
@@ -112,7 +112,7 @@
                 $("#showUploadFile").toggle(500);
             })
         });
-        
+
     </script>
 
     <!-- Flowbite JS -->

@@ -32,7 +32,7 @@ class TemplatesController extends Controller
         $category->template_id = $template_id->id;
         $category->save();
 
-        Storage::disk('local')->makeDirectory($request->title);
+        //Storage::disk('local')->makeDirectory($request->title);
 
         return redirect('/users/home');
     }

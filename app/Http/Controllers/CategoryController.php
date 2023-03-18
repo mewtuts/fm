@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Files;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use PhpOffice\PhpWord\IOFactory;
 
 class CategoryController extends Controller
 {
@@ -137,10 +138,15 @@ class CategoryController extends Controller
 
 
     //method for showing the content of selected file
-    public function viewFile(Request $request, $file_id){
-        $files = Files::find($file_id)->get();
+    public function viewFile(Request $request, $title, $file_id){
 
-        return view('users.viewFile', compact('files'));
+        $files = Files::find($file_id);
+
+        $user_id = FacadesSession::get('user_id');
+
+        $title = $title;
+        return view('users.viewFile', compact('files', 'user_id', 'title'));
+
     }
 
 

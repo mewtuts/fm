@@ -7,15 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    @foreach ($files as $file)
 
-    <iframe 
-        src="https://view.officeapps.live.com/op/embed.aspx?src={{ asset('bi-monthly-report/Book1_1.xlsx') }}" 
-        style="width:600px; height:500px;" 
-    frameborder="0">
-    </iframe>
-    
-        {{-- <iframe height="400" width="400" src="/assets/macaraeg/Book1_1.xlsx" frameborder="0"></iframe> --}}
-    @endforeach
+    <iframe src="/{{$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type }}" width="100%" height="945px"></iframe>
+
 </body>
 </html>
