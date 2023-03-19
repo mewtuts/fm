@@ -63,6 +63,9 @@ Route::get('/users/logout', [LoginController::class, 'logout']);
 //route for delete template
 Route::get('/users/delete_template/{template_id}', [TemplatesController::class, 'delete_template']);
 
+//route for deleting sub folder and files
+Route::post('/users/delete_sff', [CategoryController::class, 'delete_sff']);
+
 
 
 

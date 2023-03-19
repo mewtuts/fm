@@ -31,8 +31,8 @@
                     <!-- Form to Create Folder -->
                     <div class="mt-5 hidden" id="showFolderForm">
                         <form action="{{ route('storeSubParent') }}" class="px-10 py-10 bg-slate-200 rounded" method="post"> @csrf
-                            <input type="text" name="title" placeholder="Folder Name" class="w-full p-3 rounded">
-                            <select name="parent_id" id="" class="w-full p-3 mt-5 rounded text-zinc-600">
+                            <input type="text" name="title" placeholder="Folder Name" class="w-full p-3 rounded" required>
+                            <select name="parent_id" id="" class="w-full p-3 mt-5 rounded text-zinc-600" required>
                                 <option value="" selected disabled>Specify where the folder will locate</option>
                                 @foreach ($categories as $category)
 
@@ -81,22 +81,26 @@
         </div>
         <!-- Created Folder and Upload File Here... -->
         <div class="p-5">
-            <div class="w-full flex items-center justify-between border-b">
+
+            <form class="w-full grid grid-cols-2 items-center justify-between border-b" action="{{ '/users/delete_sff' }}" method="post"> @csrf
+
                 <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folder Name and Files</h1>
-                <form action="">
-                    <a href="#"><i class="bi bi-pencil-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
-                    <a href="#"><i class="bi bi-trash3-fill text-zinc-600 text-2xl hover:text-3xl p-2"></i></a>
 
+                <div class="text-right">
+                    <input class="border-2 border-black p-2" type="submit" name="submit" value="update">
+                    <input class="border-2 border-black p-2" type="submit" name="submit" value="delete">
+                </div>
 
+                @foreach ($categories as $category)
 
-                </form>
-            </div>
+                    <x-sub-category :category="$category" />
+
+                @endforeach
+
+            </form>
+
         </div>
     </div>
-
-        @foreach ($categories as $category)
-            <x-sub-category :category="$category" />
-        @endforeach
 
     <!-- Jquery -->
     <script>

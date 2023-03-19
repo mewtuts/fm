@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use App\Models\Category;
 use App\Models\Files;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\IOFactory;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -160,6 +162,72 @@ class CategoryController extends Controller
         $path = '/'.$folder.'/'.$file->file_name.'_'.$user_id.'.'.$file->file_type;
 
         return response()->download(public_path($path));
+
+    }
+
+
+    //method for deleting sub folder or file
+    public function delete_sff(Request $request){
+        //dd($request->submit);
+        $folder = "folder";
+        $file = "file";
+
+        switch ($request->submit) {
+            case 'delete':
+                // if is folder
+                if ( Str::contains($request->id, $folder) ) {
+
+                    $folder_id = Str::replaceFirst($folder, '', $request->id);
+
+                    $category = Category::find($folder_id);
+
+                    if ( $category->parent_id === null ) {
+                        return redirect()->back()->with('error', 'something went wrong');
+                    }
+
+                    else {
+
+                        $category->delete();
+
+                        File::delete($category->title);
+
+                        return redirect()->back();
+
+                    }
+
+                }
+                // if is file
+                elseif ( Str::contains($request->id, $file) ) {
+
+                    $file_id = Str::replaceFirst($file, '', $request->id);
+
+                    $file = Files::find($file_id);
+
+                    $category = Category::select('id', 'user_id', 'template_id', 'title', 'parent_id')->where('id', $file->category_id)->first();
+
+                    File::delete($category->title.'/'.$file->file_name.'_'.$category->user_id.'.'.$file->file_type);
+                    $file->delete();
+
+                    return redirect()->back();
+
+                }
+
+                else {
+
+
+
+                }
+
+                break;
+
+            case 'update':
+                # code...
+                break;
+
+            default:
+                # code...
+                break;
+        }
 
     }
 
