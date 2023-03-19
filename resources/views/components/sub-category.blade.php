@@ -19,7 +19,7 @@
     <!--Uploaded files-->
     @foreach ($category->getFiles as $file)
 
-        <div class='ml-5 mt-1 hover:underline cursor-pointer p-2 hover:bg-slate-300 rounded w-full text-zinc-600 border-b-2'>
+        <div class='ml-5 mt-1 cursor-pointer p-2 hover:bg-slate-300 rounded w-full text-zinc-600 border-b-2'>
             @if ($file->file_type == 'jpeg' || $file->file_type == 'jpg' || $file->file_type == 'png' || $file->file_type == 'gif')
                 <input class="" type="radio" name="id" value="{{ $file->id }}file">
                 <i class="bi bi-file-earmark-image text-green-800 text-xl pr-2"></i>
@@ -27,9 +27,14 @@
                 <input class="" type="radio" name="id" value="{{ $file->id }}file">
                 <i class="bi bi-file-earmark-fill text-green-800 text-xl pr-2"></i>
             @endif
+<<<<<<< Updated upstream
 
             <a href="{{ '/users/viewFile/'.$category->title.'/'.$file->id }}" target="_blank"> {{ $file->file_name }}</a>
             {{-- <a title="Download" ref="{{ '/users/downloadFile/'. $category->title  .'/'.  $file->id }}"> {{ $file->file_name }} </a>  --}}
+=======
+            
+            <a title="Download" ref="{{ '/users/downloadFile/'. $category->title  .'/'.  $file->id }}" class=""> {{ $file->file_name }} </a> 
+>>>>>>> Stashed changes
         </div>
 
         <!-- {{-- <div class='ml-3 hover:text-blue-800 hover:underline'><a href="{{ '/users/viewFile/'.$file->id }}"> {{ $file->file_name }}</a></div>  --}} -->
