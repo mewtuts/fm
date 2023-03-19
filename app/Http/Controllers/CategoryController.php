@@ -251,7 +251,7 @@ class CategoryController extends Controller
                 break;
 
             case 'update':
-                # code...
+                return redirect()->back();
                 break;
 
             default:
