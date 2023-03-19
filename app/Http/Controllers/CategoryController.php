@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Settings;
+use PhpOffice\PhpWord\PhpWord;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -140,6 +142,31 @@ class CategoryController extends Controller
 
 
     //method for showing the content of selected file
+    // public function viewFile(Request $request, $title, $file_id){
+    //     // Disable the debug mode to prevent PHP warnings from being displayed
+    //     Settings::setOutputEscapingEnabled(true);
+
+    //     $files = Files::find($file_id);
+
+    //     $user_id = FacadesSession::get('user_id');
+
+    //     $title = $title;
+
+    //     $path = '/app/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
+
+    //     // Read the DOCX file and convert it to HTML
+    //     $phpword = IOFactory::load(storage_path($path));
+
+    //     $tempFile = tempnam(sys_get_temp_dir(), 'phpword');
+    //     $htmlWriter = IOFactory::createWriter($phpword, 'HTML');
+    //     $htmlWriter->save($tempFile);
+
+    //     $html = file_get_contents($tempFile);
+
+    //     return view('users.viewFile', compact('html'));
+
+    // }
+    //method for showing the content of selected file
     public function viewFile(Request $request, $title, $file_id){
 
         $files = Files::find($file_id);
@@ -147,7 +174,10 @@ class CategoryController extends Controller
         $user_id = FacadesSession::get('user_id');
 
         $title = $title;
-        return view('users.viewFile', compact('files', 'user_id', 'title'));
+
+        $path = '/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
+
+        return view('users.viewFile', compact('path'));
 
     }
 

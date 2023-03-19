@@ -56,6 +56,17 @@ return [
             'throw' => false,
         ],
 
+        // ...
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GOOGLE_PROJECT_ID'),
+            'key_file' => env('GOOGLE_APPLICATION_CREDENTIALS'),
+            'bucket' => env('GOOGLE_STORAGE_BUCKET'),
+            'path_prefix' => env('GOOGLE_STORAGE_PATH_PREFIX'),
+            'url' => env('GOOGLE_STORAGE_URL'),
+        ],
+        // ...
+
     ],
 
     /*
