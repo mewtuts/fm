@@ -84,7 +84,7 @@
 
             <form class="w-full grid grid-cols-2 items-center justify-between border-b" action="{{ '/users/delete_sff' }}" method="post"> @csrf
 
-                <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folder Name and Files</h1>
+                <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folders and Files</h1>
 
                 <div class="showEditDelete text-right">
                     <!-- Update -->

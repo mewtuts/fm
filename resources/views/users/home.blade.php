@@ -76,14 +76,14 @@
                 @else
                     @foreach ($templates as $template)
                         @if (Session::get('user_id') == $template->user_id)
-                            <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl cursor-pointer text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
+                            <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
                                         <a href="{{ '/users/file/'.$template->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
                                     </div>
                                     <div>
                                         <!--Edit icon-->
-                                        <a href="#edit" class="cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
+                                        <a href="#edit" class="nameUpdate cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
 
                                         <!--Delete icon-->
                                         <a href="{{ '/users/delete_template/'.$template->id }}" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
@@ -92,8 +92,18 @@
                                     <p class="text-5xl mb-10 mt-5 text-orange-300">
                                         <i class="bi bi-folder-fill"></i>
                                     </p>
-                                        <!-- Update New Name -->
-                                    <a href="" class="text-xl text-center mb-10" contenteditable="true">
+
+                                    <!-- Update New Name -->
+                                    <div class="h-40 absolute mt-7 flex items-end">
+                                         <form action="" class="hidden showFolderUpdate">
+                                            <div>
+                                                <input class="h-10 bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text">
+                                                <input type="submit" value="Go" class="h-10 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
+                                            </div>
+                                         </form>
+                                    </div>
+
+                                    <a href="" class="text-xl text-center mb-10">
                                         {{ $template->title }}
                                     </a>
                                 </div>
@@ -119,6 +129,13 @@
             $("#hideTemplate").click(function(){
                 $("#showTemplateForm").hide();
             });
+        });
+
+        // Toggle for updating the name of the folder
+        $(document).ready(function(){
+            $(".nameUpdate").click(function(){
+                $(".showFolderUpdate").toggle();
+            })
         });
     </script>
 
