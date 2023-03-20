@@ -21,10 +21,10 @@
 
         <div class='ml-5 mt-1 cursor-pointer p-2 hover:bg-slate-300 rounded w-full text-zinc-600 border-b-2'>
             @if ($file->file_type == 'jpeg' || $file->file_type == 'jpg' || $file->file_type == 'png' || $file->file_type == 'gif')
-                <input class="" type="radio" name="id" value="{{ $file->id }}file">
+                <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
                 <i class="bi bi-file-earmark-image text-green-800 text-xl pr-2"></i>
             @else
-                <input class="" type="radio" name="id" value="{{ $file->id }}file">
+                <input class="radioShow" type="radio" name="id" value="{{ $file->id }}file">
                 <i class="bi bi-file-earmark-fill text-green-800 text-xl pr-2"></i>
             @endif
 
@@ -53,5 +53,9 @@
 </div>
 
 <!-- <script>
-    changIcon = (icon) =>icon.classList.toggle("bi-caret-down-fill");
+    $(document).ready(function(){
+        $(".radioShow").click(function(){
+            $(".showEditDelete").toggle();
+        })
+    });
 </script> -->

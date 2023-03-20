@@ -86,9 +86,13 @@
 
                 <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folder Name and Files</h1>
 
-                <div class="text-right">
-                    <input class="border-2 border-black p-2" type="submit" name="submit" value="update">
-                    <input class="border-2 border-black p-2" type="submit" name="submit" value="delete">
+                <div class="showEditDelete text-right">
+                    <!-- Update -->
+                    <label for="update"><i class="bi bi-pencil-fill w-full text-zinc-600 mr-2 cursor-pointer text-2xl hover:text-3xl"></i></label>
+                    <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="update" id="update">
+                    <!-- Delete -->
+                    <label for="delete"><i class="bi bi-trash-fill w-full text-zinc-600 cursor-pointer text-2xl hover:text-3xl"></i></label>
+                    <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="delete" id="delete">
                 </div>
 
                 @foreach ($categories as $category)
