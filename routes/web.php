@@ -42,6 +42,9 @@ Route::get('/users/home', function(){
 //route for adding template
 Route::post('/users/addTemplate', [TemplatesController::class, 'addTemplate']);
 
+//route for updating template title
+Route::post('/users/editTemplate/{template_id}', [TemplatesController::class, 'editTemplate']);
+
 //route for viewing file page
 Route::get('/users/file/{template_id}', [CategoryController::class, 'file']);
 
