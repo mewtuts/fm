@@ -22,7 +22,23 @@
         <div class='ml-5  mt-1 cursor-pointer p-2 hover:bg-slate-300 rounded w-full text-zinc-600 border-b-2'>
             @if ($file->file_type == 'jpeg' || $file->file_type == 'jpg' || $file->file_type == 'png' || $file->file_type == 'gif')
                 <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
-                <i class="bi bi-file-earmark-image text-green-800 text-xl pr-2"></i>
+                <i class="bi bi-file-earmark-image text-indigo-800 text-xl pr-2"></i>
+            
+            @elseif ($file->file_type == 'docx')
+                <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
+                <i class="bi bi-file-earmark-word-fill text-blue-800 text-xl pr-2"></i>
+
+            @elseif ($file->file_type == 'xlsx')
+                <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
+                <i class="bi bi-file-earmark-excel-fill text-green-800 text-xl pr-2"></i>
+
+            @elseif ($file->file_type == 'ppt' || $file->file_type == 'pptx')
+                <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
+                <i class="bi bi-file-earmark-ppt-fill text-orange-800 text-xl pr-2"></i>
+
+            @elseif ($file->file_type == 'pdf')
+                <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file">
+                <i class="bi bi-file-earmark-pdf-fill text-red-800 text-xl pr-2"></i>
             @else
                 <input class="radioShow" type="radio" name="id" value="{{ $file->id }}file">
                 <i class="bi bi-file-earmark-fill text-green-800 text-xl pr-2"></i>

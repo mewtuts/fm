@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="flex flex-col pt-4 w-full">
-                        <label for="middle_name" class="text-base text-zinc-800 px-1">Middle name</label>
+                        <label for="middle_name" class="text-base text-zinc-800 px-1">Middle initial</label>
                         <input type="text" id="middle_name" name="middle_name" placeholder="your middle name" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50" />
                     </div>
 
