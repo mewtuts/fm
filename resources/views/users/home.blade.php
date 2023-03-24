@@ -118,7 +118,7 @@
                                         {{ $template->title }}
                                     </a>
                                     <!-- Template Description -->
-                                    <div class="px-5 h-32 border-2 border-transparent overflow-hidden mb-2">
+                                    <div class="px-5 max-h-32 h-fit border-2 border-transparent overflow-hidden mb-2">
                                         <p class="text-center">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. he purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless</p>
                                     </div>
                                 </div>

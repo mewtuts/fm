@@ -98,7 +98,7 @@
             <!-- Folders and Files -->
             <div class="xl:col-span-4 lg:col-span-4 md:col-span-3 p-5">
                 <!-- Template Title and Template Description -->
-                <div class="mt-5">
+                <div class="">
                     <!-- Template Title -->
                     <span class="text-xl font-bold text-zinc-700">Template Title</span>
                     <!-- Template Description -->

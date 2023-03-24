@@ -55,14 +55,14 @@
                             <input type="checkbox" class="bg-slate-50 outline-none pl-2 cursor-pointer" id="showPassword" onclick="passwordFunction()">
                             <label for="showPassword" class="text-zinc-800 cursor-pointer">Show Password</label>
                         </div>
-                        <a href="" class="text-green-800 hover:underline hover:underline-green-900 fl-xsm:pt-2">Forgot Password</a>
+                        <!-- <a href="" class="text-green-800 hover:underline hover:underline-green-900 fl-xsm:pt-2">Forgot Password</a> -->
                     </div>
     
                     <input type="submit" value="Log In" name="login" class=" rounded bg-green-800 text-slate-50 cursor-pointer text-xl hover:bg-green-900 p-3 mt-10">
 
-                    <div class="text-center text-lg p-5">
+                    <!-- <div class="text-center text-lg p-5">
                         <p>Don't have an account? <a href="{{ '/register' }}" class=" text-green-800 hover:underline hover:decoration-2 font-semibold">Register here.</a></p>
-                    </div>
+                    </div> -->
                 </form>
             </div>
 
