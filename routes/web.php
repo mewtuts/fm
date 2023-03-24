@@ -27,6 +27,9 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register');
 });
+Route::get('/users/folderfiles', function () {
+    return view('users.folderfiles');
+});
 
 Route::post('/register/store', [RegisterController::class, 'register'])->name('register');
 Route::post('/login', [LoginController::class, 'login'])->name('login');

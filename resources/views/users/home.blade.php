@@ -40,12 +40,22 @@
                     <!-- Form to create New Template -->
                     <form action="{{ 'addTemplate' }}" class="p-3 bg-slate-200 rounded mt-5 relative hidden" id="showTemplateForm" method="POST">@csrf
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
+                        <!-- Title Description || textarea -->
+                        <div class="mt-3">
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Title description" class="resize-none p-2 border-none rounded-lg"></textarea>
+                        </div>
                         <!-- Buttons -->
                         <div class="flex justify-end mt-3">
                             <input type="submit" value="Create" name="submit" class="bg-green-800 hover:bg-green-900 text-white w-full rounded-lg p-3 text-lg cursor-pointer">
                             <!-- {{-- <input type="reset" value="Cancel" id="hideTemplate" class="bg-red-800 hover:bg-red-900 text-white w-6/12 rounded-lg p-3 text-lg cursor-pointer" name="back"> --}} -->
                         </div>
                     </form>
+                </li>
+                <li>
+                    <a href="{{ '/users/folderfiles' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
+                        <i class="bi bi-file-earmark-fill text-xl"></i>
+                        <span class="flex-1 ml-5 whitespace-nowrap">Temporary File</span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ '/users/logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
@@ -76,9 +86,10 @@
                 @else
                     @foreach ($templates as $template)
                         @if (Session::get('user_id') == $template->user_id)
-                            <div class="flex items-center justify-center flex-col shadow h-64 rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
+                            <div class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
+                                        <!-- View Folder -->
                                         <a href="{{ '/users/file/'.$template->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
                                     </div>
                                     <div>
@@ -106,6 +117,10 @@
                                     <a href="" class="text-xl text-center mb-10">
                                         {{ $template->title }}
                                     </a>
+                                    <!-- Template Description -->
+                                    <div class="px-5 h-32 border-2 border-transparent overflow-hidden mb-2">
+                                        <p class="text-center">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. he purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless</p>
+                                    </div>
                                 </div>
                         @endif
                     @endforeach
