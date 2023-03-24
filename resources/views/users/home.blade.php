@@ -59,7 +59,7 @@
                 </li>
                 <li>
                     <a href="{{ '/users/logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
-                        <i class="bi bi-box-arrow-left text-xl"></i>
+                        <i class="bi bi-arrow-left-circle-fill text-xl"></i>
                         <span class="flex-1 ml-5 whitespace-nowrap">Sign Out</span>
                     </a>
                 </li>
@@ -105,7 +105,7 @@
                                     </p>
 
                                     <!-- Update New Name -->
-                                    <div class="h-40 absolute mt-7 flex items-end">
+                                    <div class="absolute flex items-end">
                                          <form action="{{ '/users/editTemplate/'.$template->id }}" method="POST" class="hidden showFolderUpdate"> @csrf
                                             <div>
                                                 <input class="h-10 bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">

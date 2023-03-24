@@ -21,10 +21,10 @@
 
     <!-- Main Content -->
     <div class="w-screen h-fit overflow-auto">
-       <div class="grid xl:grid-cols-6 lg:grid-cols-6 xl:gap-10">
-            <div class="h-fit xl:col-span-2 lg:col-span-3">
+       <div class="grid xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-6 gap-5">
+            <div class="h-fit xl:col-span-2 lg:col-span-2 md:col-span-3 p-5">
                 <!-- Form Content -->
-                <div class="shadow p-5 h-fit rounded-lg ml-5 mt-5">
+                <div class="shadow p-5 h-fit rounded-lg">
                     <!-- Buttons to create and upload -->
                     <div class="w-full flex justify-end  px-5 pb-2">
                         <!-- Create Folder -->
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 max-h-96 pl-5 py-2">
+                <div class="mt-5 max-h-96 py-2">
                     <!-- Recent Uploads -->
                     <div class="rounded-lg w-full shadow">
                         <h1 class="px-3 py-4 text-xl bg-slate-200 rounded-tr-lg rounded-tl-lg">Recent Upload Files</h1>
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <!-- Folders and Files -->
-            <div class="xl:col-span-4 lg:col-span-3 pr-5">
+            <div class="xl:col-span-4 lg:col-span-4 md:col-span-3 p-5">
                 <!-- Template Title and Template Description -->
                 <div class="mt-5">
                     <!-- Template Title -->
