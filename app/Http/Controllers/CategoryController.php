@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use App\Models\Category;
 use App\Models\Files;
+use App\Models\Templates;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -12,11 +13,45 @@ use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\PhpWord;
 use Illuminate\Support\Str;
+use SebastianBergmann\Template\Template;
+
 
 class CategoryController extends Controller
 {
+    //method for converting a number to Roman numerals
+    public function toRomanNumerals($number)
+    {
+        $romanNumerals = [
+            1000 => 'M',
+            900 => 'CM',
+            500 => 'D',
+            400 => 'CD',
+            100 => 'C',
+            90 => 'XC',
+            50 => 'L',
+            40 => 'XL',
+            10 => 'X',
+            9 => 'IX',
+            5 => 'V',
+            4 => 'IV',
+            1 => 'I',
+        ];
 
+        $result = '';
+        foreach ($romanNumerals as $value => $numeral) {
+            while ($number >= $value) {
+                $result .= $numeral;
+                $number -= $value;
+            }
+        }
+
+        return $result;
+    }
+
+    //method for redirect to file.blade.php
     public function file($template_id){
+
+        $template = Templates::find($template_id);
 
         $category_id = Category::select('id')->where('template_id', $template_id)->first();
 
@@ -30,11 +65,22 @@ class CategoryController extends Controller
         ->get()
         ->toTree();
 
+        //retrieve the five most recently inserted records in files
+        $recentlyInsertedData = Files::join('categories', 'categories.id', '=', 'files.category_id')
+        ->select('files.*', 'categories.template_id')
+        ->latest('files.created_at')
+        ->take(5)
+        ->where('categories.template_id', $template_id)
+        ->get();
+
         session()->put('template_id', $template_id);
 
         return view('users.file', [
             'categories' => $categories,
-            'category_ids' => $category_ids
+            'category_ids' => $category_ids,
+            'title' => $template->title,
+            'descriptions' => $template->descriptions,
+            'recentlyInsertedData' => $recentlyInsertedData
         ]);
     }
 
@@ -52,7 +98,7 @@ class CategoryController extends Controller
         $category->user_id = $user_id;
         $category->save();
 
-        //getting the lates row in Contents Table
+        //getting the latest row in Contents Table
         $category = Category::select('id')->latest('created_at')->first();
 
         //Storage::disk('local')->makeDirectory($request->title);
@@ -75,10 +121,24 @@ class CategoryController extends Controller
         $template_id = FacadesSession::get('template_id');
 
         //getting the parent title, id and user id
-        $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
+        $parent_category = Category::select('id', 'title', 'roman')->where('id', $request->parent_id)->first();
 
         //getting the latest row in Contents Table
         $category_latest_id = Category::select('id')->latest('created_at')->first();
+
+        //storing roman value
+        if ($request->parent_id === null) {
+            $find = Category::where('template_id', $template_id)->first();
+            $id = $find->id;
+            $countParentID = Category::where('parent_id', $id)->count();
+            $roman = $this->toRomanNumerals($countParentID+1);
+        }
+        else {
+            $countParentID = Category::where('parent_id', $request->parent_id)->count();
+            $parentRoman = $parent_category->roman.'.';
+            $roman =  $parentRoman.$this->toRomanNumerals($countParentID+1);
+        }
+        //end storing roman value
 
         //calling category table from database to store input request.
         $category = new Category();
@@ -86,6 +146,7 @@ class CategoryController extends Controller
         $category->template_id = $template_id;
         $category->title = $request->title;
         $category->parent_id = $request->parent_id;
+        $category->roman = $roman;
         $category->save();
 
         //making a directory folder in local directory path 'storage/app'
@@ -101,7 +162,8 @@ class CategoryController extends Controller
         //dd($request);
         $request->validate([
             'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx,jpg,png|max:204800',
-            'parent_id' => 'required'
+            'parent_id' => 'required',
+            'alternative_name' => 'required'
         ]);
 
         //getting the user id from session
@@ -128,6 +190,7 @@ class CategoryController extends Controller
 
         $file = new Files();
         $file->category_id = $request->parent_id;
+        $file->alternative_name = $request->alternative_name;
         $file->file_name = $file_name;
         $file->file_type = $file_type;
         $file->file_size = $file_size;
@@ -138,6 +201,31 @@ class CategoryController extends Controller
         $request->file->move($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
 
         return redirect()->back()->with('success', 'succesfully upload file');
+    }
+
+
+    //method for uploading URL
+    public function uploadUrl(Request $request){
+        $request->validate([
+            'url' => 'required|url',
+            'alternative_name' => 'required|unique:files,alternative_name'
+        ]);
+
+        //getting the user id from session
+        $user_id = FacadesSession::get('user_id');
+
+        //getting the template id from session
+        $template_id = FacadesSession::get('template_id');
+
+        $file = new Files();
+        $file->alternative_name = $request->alternative_name;
+        $file->url = $request->url;
+        $file->file_type = "url";
+        $file->category_id = $request->parent_id;
+        $file->save();
+
+        return redirect()->back()->with('success', 'succesfully upload URL');
+
     }
 
 
@@ -198,7 +286,10 @@ class CategoryController extends Controller
 
     //method for deleting sub folder or file
     public function delete_sff(Request $request){
-        //dd($request->submit);
+        $request->validate([
+            'id' => 'required'
+        ]);
+
         $folder = "folder";
         $file = "file";
 

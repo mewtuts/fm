@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Session as FacadesSession;
 use App\Models\Category;
 use App\Models\Contents;
 use App\Http\Controllers\LoginController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\UsersController;
 use App\Models\Templates;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\Template\Template;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,14 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 //route for user home page
 Route::get('/users/home', function(){
+
+    //getting the user id from session
+    $user_id = FacadesSession::get('user_id');
+
+    $template = Templates::where('user_id', $user_id)->get();
+
     return view('users.home', [
-        'templates' => Templates::get()
+        'templates' => $template
     ]);
 });
 
@@ -57,6 +65,9 @@ Route::post('/users/storeSubParent', [CategoryController::class, 'storeSubParent
 //route for uploading file
 Route::post('/users/uploadFile', [CategoryController::class, 'uploadFile'])->name('uploadFile');
 
+//route for uploading URL
+Route::post('/users/uploadUrl', [CategoryController::class, 'uploadUrl'])->name('uploadUrl');
+
 //route for viewing the uploaded file
 Route::get('/users/viewFile/{title}/{file_id}', [CategoryController::class, 'viewFile']);
 
@@ -71,23 +82,6 @@ Route::get('/users/delete_template/{template_id}', [TemplatesController::class, 
 
 //route for deleting sub folder and files
 Route::post('/users/delete_sff', [CategoryController::class, 'delete_sff']);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -22,6 +22,7 @@ class TemplatesController extends Controller
 
         $template = new Templates();
         $template->title = $request->title;
+        $template->descriptions = $request->descriptions;
         $template->user_id = $user_id;
         $template->save();
 

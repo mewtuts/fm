@@ -42,7 +42,7 @@
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
                         <!-- Title Description || textarea -->
                         <div class="mt-3">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Title description" class="resize-none p-2 border-none rounded-lg"></textarea>
+                            <textarea name="descriptions" id="" cols="30" rows="10" placeholder="Title description" class="resize-none p-2 border-none rounded-lg"></textarea>
                         </div>
                         <!-- Buttons -->
                         <div class="flex justify-end mt-3">
@@ -51,12 +51,12 @@
                         </div>
                     </form>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ '/users/folderfiles' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
                         <i class="bi bi-file-earmark-fill text-xl"></i>
                         <span class="flex-1 ml-5 whitespace-nowrap">Temporary File</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{ '/users/logout' }}" class="flex items-center p-4 text-lg font-medium text-white rounded-lg hover:bg-slate-50 hover:text-green-900">
                         <i class="bi bi-arrow-left-circle-fill text-xl"></i>
@@ -119,7 +119,7 @@
                                     </a>
                                     <!-- Template Description -->
                                     <div class="px-5 max-h-32 h-fit border-2 border-transparent overflow-hidden mb-2">
-                                        <p class="text-center">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. he purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy, laying out pages with meaningless</p>
+                                        <p class="text-center">{{ $template->descriptions }}</p>
                                     </div>
                                 </div>
                         @endif

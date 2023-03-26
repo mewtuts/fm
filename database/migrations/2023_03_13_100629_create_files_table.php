@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('category_id');
-            $table->string('file_name');
-            $table->string('file_type');
-            $table->string('file_size');
-            $table->string('file_path');
+            $table->string('alternative_name')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_type')->nullable();
+            $table->string('file_size')->nullable();
+            $table->string('file_path')->nullable();
+            $table->text('url')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });

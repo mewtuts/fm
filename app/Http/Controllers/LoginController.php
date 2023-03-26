@@ -11,12 +11,11 @@ class LoginController extends Controller
     public function login(Request $request){
         if(isset($request->login))
         {
-            $users = Users::Select('id', 'username', 'password', 'id_number', 'first_name', 'middle_name', 'last_name', 'email')->where('username', $request->username)->where('password', $request->password)->first();
+            $users = Users::Select('id', 'username', 'password', 'first_name', 'middle_name', 'last_name', 'email')->where('username', $request->username)->where('password', $request->password)->first();
             if($users)
             {
                 session()->put('user_id', $users->id);
                 session()->put('username', $users->username);
-                session()->put('id_number', $users->id_number);
                 session()->put('first_name', $users->first_name);
                 session()->put('middle_name', $users->middle_name);
                 session()->put('last_name', $users->last_name);
@@ -28,7 +27,7 @@ class LoginController extends Controller
             {
                 return view('login')->with('error', 'The username you have enter is not registered');
             }
-            
+
         }else
         {
 
@@ -39,7 +38,6 @@ class LoginController extends Controller
     {
         $request->session()->forget('user_id');
         $request->session()->forget('username');
-        $request->session()->forget('id_number');
         $request->session()->forget('first_name');
         $request->session()->forget('middle_name');
         $request->session()->forget('last_name');
