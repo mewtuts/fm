@@ -43,11 +43,17 @@
                     <div class="flex flex-col w-full">
                         <label for="username" class="text-base text-zinc-800 px-1">Username</label>
                         <input type="text" id="username" name="username" placeholder="your username" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50">
+                        <!-- input here error message-->
+                        <p class="p-1 text-red-600 hidden">Error message</p>
+                        <!-- input here error message-->
                     </div>
     
                     <div class="flex flex-col pt-4">
                         <label for="password" class="text-base text-zinc-800 px-1">Password</label>
                         <input type="password" id="password" name="password" placeholder="Password" class="shadow border rounded w-full py-3 px-3 text-gray-700 mt-1 focus:outline-green-900 bg-slate-50">
+                        <!-- input here error message-->
+                        <p class="p-1 text-red-600 hidden">Error message</p>
+                        <!-- input here error message-->
                     </div>
                     
                     <div class="flex justify-between pt-4 fl-xsm:flex-col">
