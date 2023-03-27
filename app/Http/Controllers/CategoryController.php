@@ -176,6 +176,10 @@ class CategoryController extends Controller
         //getting the template id from session
         $template_id = FacadesSession::get('template_id');
 
+        //finding the template row and store a variable for template name
+        $templates = Templates::find($template_id);
+        $template_name = $templates->title;
+
         //getting the parent title, id and user id
         $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
 
@@ -202,7 +206,7 @@ class CategoryController extends Controller
         $file->save();
 
         //$request->file('file')->storeAs($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
-        $request->file->move($parent_category->title, $file_name.'_'.$user_id.".".$file_type);
+        $request->file->move($template_name.'/'.$parent_category->title, $file_name.'_'.$user_id.".".$file_type);
 
         return redirect()->back()->with('success', 'succesfully upload file');
     }
@@ -265,9 +269,12 @@ class CategoryController extends Controller
 
         $user_id = FacadesSession::get('user_id');
 
+        $template_id = FacadesSession::get('template_id');
+        $template = Templates::find($template_id);
+        $template_name = $template->title;
         $title = $title;
 
-        $path = '/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
+        $path = '/'.$template_name.'/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
 
         return view('users.viewFile', compact('path'));
 
