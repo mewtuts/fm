@@ -39,9 +39,13 @@ class TemplatesController extends Controller
         //Storage::disk('local')->makeDirectory($request->title);
 
         //making folder inside the public directory.
-        File::makeDirectory(public_path($request->title));
-
-        return redirect('/users/home');
+        $oldName = public_path($request->title);
+        if (File::exists($oldName)) {
+            return redirect('/users/home');
+        }else{
+            File::makeDirectory(public_path($request->title));
+            return redirect('/users/home');
+        }
     }
 
     //method for deleting template

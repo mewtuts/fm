@@ -135,7 +135,11 @@ class CategoryController extends Controller
         }
         else {
             $countParentID = Category::where('parent_id', $request->parent_id)->count();
-            $parentRoman = $parent_category->roman.'.';
+            if ( $parent_category->roman == 0) {
+                $parentRoman = $parent_category->roman;
+            }else{
+                $parentRoman = $parent_category->roman.'.';
+            }
             $roman =  $parentRoman.$this->toRomanNumerals($countParentID+1);
         }
         //end storing roman value
@@ -332,22 +336,74 @@ class CategoryController extends Controller
                     return redirect()->back();
 
                 }
-
-                else {
-
-
-
-                }
-
-                break;
+            break;
 
             case 'update':
-                return redirect()->back();
-                break;
+                // if is folder
+                if ( Str::contains($request->id, $folder) ) {
+
+                    $folder_id = Str::replaceFirst($folder, '', $request->id);
+
+                    $category = Category::find($folder_id);
+
+                    if ( $category->parent_id === null ) {
+                        return redirect()->back()->with('error', 'something went wrong');
+                    } else {
+
+                        $oldName = public_path($category->title);
+                        $newName = public_path($request->title);
+
+                        if (File::exists($oldName)) {
+                            File::move($oldName, $newName);
+
+                            $category->title = $request->title;
+                            $category->save();
+
+                            //category field
+                            $category_id = Category::select('id')
+                            ->where('parent_id', null)
+                            ->where('template_id', $category)->first();
+
+                            $category = Category::find($category->id);
+
+                            $category->title = $request->title;
+                            $category->save();
+
+                            return redirect()->back()->with('success', 'Folder renamed successfully');
+
+                        } else {
+
+                            $category->title = $request->title;
+
+                            $category->save();
+
+                            return redirect()->back()->with('success', 'Successfully update folder name');
+
+                        }
+
+                    }
+
+                }
+                // if is file
+                elseif ( Str::contains($request->id, $file) ) {
+
+                    $file_id = Str::replaceFirst($file, '', $request->id);
+
+                    $file = Files::find($file_id);
+
+                    $file->alternative_name = $request->title;
+                    $file->save();
+
+                    return redirect()->back()->with('success', 'successfully update file name');
+
+                }
+            break;
 
             default:
-                # code...
-                break;
+
+                return redirect()->back();
+
+            break;
         }
 
     }

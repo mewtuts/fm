@@ -33,8 +33,8 @@ Route::get('/users/folderfiles', function () {
     return view('users.folderfiles');
 });
 
+
 Route::post('/register/store', [RegisterController::class, 'register'])->name('register');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
 //route for user home page
@@ -50,51 +50,57 @@ Route::get('/users/home', function(){
     ]);
 });
 
-//route for adding template
-Route::post('/users/addTemplate', [TemplatesController::class, 'addTemplate']);
 
-//route for updating template title
-Route::post('/users/editTemplate/{template_id}', [TemplatesController::class, 'editTemplate']);
+Route::controller(TemplatesController::class)->group(function () {
+    //route for adding template
+    Route::post('/users/addTemplate', 'addTemplate');
 
-//route for viewing file page
-Route::get('/users/file/{template_id}', [CategoryController::class, 'file']);
+    //route for updating template title
+    Route::post('/users/editTemplate/{template_id}', 'editTemplate');
 
-//route for storing sub parent folder
-Route::post('/users/storeSubParent', [CategoryController::class, 'storeSubParent'])->name('storeSubParent');
-
-//route for uploading file
-Route::post('/users/uploadFile', [CategoryController::class, 'uploadFile'])->name('uploadFile');
-
-//route for uploading URL
-Route::post('/users/uploadUrl', [CategoryController::class, 'uploadUrl'])->name('uploadUrl');
-
-//route for viewing the uploaded file
-Route::get('/users/viewFile/{title}/{file_id}', [CategoryController::class, 'viewFile']);
-
-//route for downloading the uploaded file
-Route::get('/users/downloadFile/{folder}/{file_id}', [CategoryController::class, 'downloadFile']);
-
-//route for logout
-Route::get('/users/logout', [LoginController::class, 'logout']);
-
-//route for delete template
-Route::get('/users/delete_template/{template_id}', [TemplatesController::class, 'delete_template']);
-
-//route for deleting sub folder and files
-Route::post('/users/delete_sff', [CategoryController::class, 'delete_sff']);
+    //route for delete template
+    Route::get('/users/delete_template/{template_id}', 'delete_template');
+});
 
 
+Route::controller(LoginController::class)->group(function () {
+    //route for login
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+    //route for logout
+    Route::get('/users/logout', [LoginController::class, 'logout']);
+});
 
 
+Route::controller(CategoryController::class)->group( function () {
+    //route for viewing file page
+    Route::get('/users/file/{template_id}', 'file');
 
+    //route for storing sub parent folder
+    Route::post('/users/storeSubParent', 'storeSubParent')->name('storeSubParent');
 
+    //route for uploading file
+    Route::post('/users/uploadFile', 'uploadFile')->name('uploadFile');
 
-Route::post('/users/home', [CategoryController::class, 'addParentFolder'])->name('addParentFolder');
+    //route for uploading URL
+    Route::post('/users/uploadUrl', 'uploadUrl')->name('uploadUrl');
 
-Route::get('/users/content/{template_id}', [UsersController::class, 'content']);
+    //route for viewing the uploaded file
+    Route::get('/users/viewFile/{title}/{file_id}', 'viewFile');
 
-Route::post('/users/content/file/upload/{content_id}', [UsersController::class, 'upload_file']);
+    //route for downloading the uploaded file
+    Route::get('/users/downloadFile/{folder}/{file_id}', 'downloadFile');
 
-Route::post('/users/content/{template_id}/{name}/mkdir', [UsersController::class, 'mkdir']);
-//END OF USERS LOGIN ROUTE
+    //route for deleting sub folder and files
+    Route::post('/users/delete_sff', 'delete_sff');
 
+    Route::post('/users/home', 'addParentFolder')->name('addParentFolder');
+});
+
+Route::controller(UsersController::class)->group(function () {
+    Route::get('/users/content/{template_id}', 'content');
+
+    Route::post('/users/content/file/upload/{content_id}', 'upload_file');
+
+    Route::post('/users/content/{template_id}/{name}/mkdir', 'mkdir');
+});
