@@ -133,6 +133,7 @@
                     <span class="text-xl font-bold text-zinc-700">{{ $title }}</span>
                     <!-- Template Description -->
                     <div class="mt-5">
+                    <h1 class="text-red-900">Heldsdsdsdsdsdsdlo</h1>
                         <p class="w-full text-justify"><span class="mr-10"></span>{{ $descriptions }}</p>
                     </div>
                 </div>
@@ -147,10 +148,10 @@
                             <!-- Updating a new name -->
                             <span class="hidden" id="showEditNameFile">
                                 <span class="mr-3">
-                                    <form action="" class="flex">
+                                    <!-- <form action="" class="flex"> -->
                                         <input type="text" class="w-3/5 border-none shadow bg-slate-50 p-2 rounded-tl rounded-bl" placeholder="New Name">
                                         <input type="submit" class="bg-green-800 hover:bg-green-900 rounded-tr rounded-br text-white p-2 cursor-pointer">
-                                    </form>
+                                    <!-- </form> -->
                                 </span>
                             </span>
                             <!-- Update -->
