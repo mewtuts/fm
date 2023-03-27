@@ -141,14 +141,23 @@
                 <div class="mt-10">
                     <form class="w-full grid grid-cols-2 items-center justify-between border-b" action="{{ '/users/delete_sff' }}" method="post"> @csrf
 
-                        <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folders and Files</h1>
+                        <h1 class="text-xl font-bold text-zinc-700">Folders and Files</h1>
 
-                        <div class="showEditDelete text-right">
+                        <div class="text-right">
+                            <!-- Updating a new name -->
+                            <span class="hidden" id="showEditNameFile">
+                                <span class="mr-3">
+                                    <form action="" class="flex">
+                                        <input type="text" class="w-3/5 border-none shadow bg-slate-50 p-2 rounded-tl rounded-bl" placeholder="New Name">
+                                        <input type="submit" class="bg-green-800 hover:bg-green-900 rounded-tr rounded-br text-white p-2 cursor-pointer">
+                                    </form>
+                                </span>
+                            </span>
                             <!-- Update -->
-                            <label for="update"><i class="bi bi-pencil-fill w-full text-zinc-600 mr-2 cursor-pointer text-2xl hover:text-3xl"></i></label>
+                            <label for="update" id="buttonEditNameFile"><i class="bi bi-pencil-fill w-full text-zinc-700 mr-2 cursor-pointer text-xl hover:text-2xl"></i></label>
                             <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="update" id="update">
                             <!-- Delete -->
-                            <label for="delete"><i class="bi bi-trash-fill w-full text-zinc-600 cursor-pointer text-2xl hover:text-3xl"></i></label>
+                            <label for="delete"><i class="bi bi-trash-fill w-full text-zinc-700 cursor-pointer text-xl hover:text-2xl"></i></label>
                             <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="delete" id="delete">
                         </div>
 
@@ -205,6 +214,11 @@
                 $("#showInsertCaption").toggle(400);
             })
         });
+        $(document).ready(function(){
+            $("#buttonEditNameFile").click(function(){
+                $("#showEditNameFile").toggle();
+            })
+        })
     </script>
 
 
@@ -305,8 +319,16 @@
                 <h1 class=" p-3 text-2xl text-zinc-800 border-r">Folders and Files</h1>
 
                 <div class="showEditDelete text-right">
+
+                <!-- Updating a new name -->
+                    <div class="inline mr-3 hidden" id="showEditNameFileTwo">
+                        <form action="" class="flex">
+                            <input type="text" class="w-3/5 border-none shadow bg-slate-50 p-2 rounded-tl rounded-bl" placeholder="New Name">
+                            <input type="submit" class="bg-green-800 hover:bg-green-900 rounded-tr rounded-br text-white p-2 cursor-pointer">
+                        </form>
+                    </div>
                     <!-- Update -->
-                    <label for="update"><i class="bi bi-pencil-fill w-full text-zinc-600 mr-2 cursor-pointer text-2xl hover:text-3xl"></i></label>
+                    <label for="update" id="buttonEditNameFileTwo"><i class="bi bi-pencil-fill w-full text-zinc-600 mr-2 cursor-pointer text-2xl hover:text-3xl"></i></label>
                     <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="update" id="update">
                     <!-- Delete -->
                     <label for="delete"><i class="bi bi-trash-fill w-full text-zinc-600 cursor-pointer text-2xl hover:text-3xl"></i></label>
@@ -336,6 +358,10 @@
         $(document).ready(function(){
             $("#uploadFile").click(function(){
                 $("#showUploadFile").toggle(500);
+            })
+
+            $("buttonEditNameFileTwo").click(function(){
+                $("showEditNameFileTwo").toggle(500);
             })
         });
 
