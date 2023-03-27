@@ -105,11 +105,11 @@
                                     </p>
 
                                     <!-- Update New Name -->
-                                    <div class="absolute flex items-end">
+                                    <div class="absolute flex items-end mt-10">
                                          <form action="{{ '/users/editTemplate/'.$template->id }}" method="POST" class="hidden showFolderUpdate"> @csrf
                                             <div>
-                                                <input class="h-10 bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">
-                                                <input type="submit" name="submit" value="Go" class="h-10 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
+                                                <input class="h-20 bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">
+                                                <input type="submit" name="submit" value="Go" class="h-20 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
                                             </div>
                                          </form>
                                     </div>
