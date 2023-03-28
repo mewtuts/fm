@@ -671,16 +671,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.49.2",
+            "version": "v1.49.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7"
+                "reference": "236ceda7ac172e635715903192ea1244afc91422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/236ceda7ac172e635715903192ea1244afc91422",
+                "reference": "236ceda7ac172e635715903192ea1244afc91422",
                 "shasum": ""
             },
             "require": {
@@ -731,9 +731,9 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.2"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.3"
             },
-            "time": "2023-03-10T20:22:17+00:00"
+            "time": "2023-03-25T14:54:11+00:00"
         },
         {
             "name": "google/cloud-storage",
@@ -1769,16 +1769,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.9",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5"
+                "reference": "d44a24690f16b8c1808bf13b1bd54ae4c63ea048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c1e114f74e518daca2729ea8c4bf1167038fa4b5",
-                "reference": "c1e114f74e518daca2729ea8c4bf1167038fa4b5",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/d44a24690f16b8c1808bf13b1bd54ae4c63ea048",
+                "reference": "d44a24690f16b8c1808bf13b1bd54ae4c63ea048",
                 "shasum": ""
             },
             "require": {
@@ -1814,7 +1814,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "2.4-dev"
+                    "dev-main": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1871,7 +1871,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-15T14:07:24+00:00"
+            "time": "2023-03-24T15:16:10+00:00"
         },
         {
             "name": "league/config",
@@ -3605,16 +3605,16 @@
         },
         {
             "name": "staudenmeir/laravel-adjacency-list",
-            "version": "v1.12.1",
+            "version": "v1.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staudenmeir/laravel-adjacency-list.git",
-                "reference": "989fc0dbf6ce4a52c06988123c2c9564f8021b97"
+                "reference": "14c67050e3ccd671da149a292a73f15961045b24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/989fc0dbf6ce4a52c06988123c2c9564f8021b97",
-                "reference": "989fc0dbf6ce4a52c06988123c2c9564f8021b97",
+                "url": "https://api.github.com/repos/staudenmeir/laravel-adjacency-list/zipball/14c67050e3ccd671da149a292a73f15961045b24",
+                "reference": "14c67050e3ccd671da149a292a73f15961045b24",
                 "shasum": ""
             },
             "require": {
@@ -3653,7 +3653,7 @@
             "description": "Recursive Laravel Eloquent relationships with CTEs",
             "support": {
                 "issues": "https://github.com/staudenmeir/laravel-adjacency-list/issues",
-                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.12.1"
+                "source": "https://github.com/staudenmeir/laravel-adjacency-list/tree/v1.12.2"
             },
             "funding": [
                 {
@@ -3661,7 +3661,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-12-16T06:58:20+00:00"
+            "time": "2023-03-25T08:49:41+00:00"
         },
         {
             "name": "staudenmeir/laravel-cte",
@@ -7282,16 +7282,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.5",
+            "version": "9.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "86e761949019ae83f49240b2f2123fb5ab3b2fc5"
+                "reference": "b65d59a059d3004a040c16a82e07bbdf6cfdd115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/86e761949019ae83f49240b2f2123fb5ab3b2fc5",
-                "reference": "86e761949019ae83f49240b2f2123fb5ab3b2fc5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b65d59a059d3004a040c16a82e07bbdf6cfdd115",
+                "reference": "b65d59a059d3004a040c16a82e07bbdf6cfdd115",
                 "shasum": ""
             },
             "require": {
@@ -7364,7 +7364,8 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.5"
+                "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.6"
             },
             "funding": [
                 {
@@ -7380,7 +7381,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T06:34:10+00:00"
+            "time": "2023-03-27T11:43:46+00:00"
         },
         {
             "name": "sebastian/cli-parser",

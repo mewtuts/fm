@@ -13,14 +13,19 @@
         <div class="w-full ml-2 rounded pl-3 pr-6 py-2 bg-slate-300 cursor-pointer text-zinc-800 text-lg" onclick="changIcon(this)">
             <input class="" type="radio" name="id" value="{{ $category->id }}folder" required>
             <i class="bi bi-folder-fill text-orange-300 text-xl pr-2"></i>
-
             @php
 
-                echo ($category->roman).'. ';
+                //echo ($category->roman).'. '.$category->title;
+                echo toRomanNumerals($index+1).'. '.$category->title;
 
             @endphp
+            {{-- @php
 
-            {{ $category->title }}
+                $parent = findParent($category->parent_id);
+
+                echo $parent.'.'.$category->title;
+
+            @endphp --}}
 
         </div>
     @endif

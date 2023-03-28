@@ -64,7 +64,7 @@ class CategoryController extends Controller
         ->where('template_id', $template_id)
         ->get()
         ->toTree();
-
+        //dd($categories);
         //retrieve the five most recently inserted records in files
         $recentlyInsertedData = Files::join('categories', 'categories.id', '=', 'files.category_id')
         ->select('files.*', 'categories.template_id')
@@ -165,7 +165,7 @@ class CategoryController extends Controller
     public function uploadFile(Request $request){
         //dd($request);
         $request->validate([
-            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx,jpg,png|max:204800',
+            'file' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx,accdb,jpg,png|max:204800',
             'parent_id' => 'required',
             'alternative_name' => 'required'
         ]);

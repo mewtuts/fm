@@ -9,6 +9,36 @@
 
         return $category->title;
     }
+
+    //method for converting a number to Roman numerals
+    function toRomanNumerals($number)
+    {
+        $romanNumerals = [
+            1000 => 'M',
+            900 => 'CM',
+            500 => 'D',
+            400 => 'CD',
+            100 => 'C',
+            90 => 'XC',
+            50 => 'L',
+            40 => 'XL',
+            10 => 'X',
+            9 => 'IX',
+            5 => 'V',
+            4 => 'IV',
+            1 => 'I',
+        ];
+
+        $result = '';
+        foreach ($romanNumerals as $value => $numeral) {
+            while ($number >= $value) {
+                $result .= $numeral;
+                $number -= $value;
+            }
+        }
+
+        return $result;
+    }
 @endphp
 <!DOCTYPE html>
 <html lang="en">
