@@ -30,6 +30,9 @@ module.exports = {
       },
       width : {
         'register-box' : '40rem',
+      },
+      height : {
+        'caption-box' : '45.5rem',
       }
     },
   },

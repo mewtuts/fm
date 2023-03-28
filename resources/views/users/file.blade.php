@@ -63,6 +63,29 @@
 
     <!-- Main Content -->
     <div class="w-screen h-fit overflow-auto">
+        <!-- Updating the description of the title -->
+        <div id="showUpdateDescription" class="hidden">
+            <div class="h-caption-box w-screen absolute flex justify-center items-center">
+                <div class="w-96">
+                    <form action="" class="bg-slate-200 px-10 py-10 rounded shadow">
+                        <h1 class="mb-5 text-xl text-center text-zinc-700">Update the description</h1>
+                        <div class="">
+                            <textarea name="" id="" cols="30" rows="10" class="resize-none rounded w-full overflow-auto bg-slate-100 border-none"></textarea>
+                        </div>
+                        <div class="mt-2">
+                            <input type="submit" value="Update" class="w-full bg-green-800 rounded cursor-pointer text-white p-2 hover:bg-green-900">
+                        </div>
+                    </form>
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        $("#buttonUpdateDescription").click(function(){
+                            $("#showUpdateDescription").toggle(500);
+                        })
+                    })
+                </script>
+            </div>
+        </div>
        <div class="grid xl:grid-cols-6 lg:grid-cols-6 md:grid-cols-6 gap-5">
             <div class="h-fit xl:col-span-2 lg:col-span-2 md:col-span-3 p-5">
                 <!-- Form Content -->
@@ -160,7 +183,25 @@
                 <!-- Template Title and Template Description -->
                 <div class="">
                     <!-- Template Title -->
-                    <span class="text-xl font-bold text-zinc-700">{{ $title }}</span>
+                    <div class="flex justify-between">
+                        <span class="text-xl font-bold text-zinc-700">{{ $title }}</span>
+                        <div class="">
+                            <button id="buttonCaption" class="bg-green-800 hover:bg-green-900 text-white py-2 px-2 rounded">Caption</button>
+                            <div class="hidden" id="showButtonCaption">
+                                <div class="flex flex-col bg-slate-200 mt-1 rounded absolute w-20">
+                                    <button id="buttonUpdateDescription" class="w-full bg-slate-300 p-1 text-zinc-700 border-slate-200 hover:bg-slate-400 border-b">Edit</button>
+                                    <button class="bg-slate-300 text-zinc-700 p-1 border-slate-200 hover:bg-slate-400">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function(){
+                                $("#buttonCaption").click(function(){
+                                    $("#showButtonCaption").toggle(300);
+                                });
+                            });
+                        </script>
+                    </div>
                     <!-- Template Description -->
                     <div class="mt-5">
                     <h1 class="text-red-900"></h1>
