@@ -67,13 +67,13 @@
         <div id="showUpdateDescription" class="hidden">
             <div class="h-caption-box w-screen absolute flex justify-center items-center">
                 <div class="w-96">
-                    <form action="" class="bg-slate-200 px-10 py-10 rounded shadow">
+                    <form action="{{ '/users/editDescription/'.$template_id }}" class="bg-slate-200 px-10 py-10 rounded shadow" method="POST">@csrf
                         <h1 class="mb-5 text-xl text-center text-zinc-700">Update the description</h1>
                         <div class="">
-                            <textarea name="" id="" cols="30" rows="10" class="resize-none rounded w-full overflow-auto bg-slate-100 border-none"></textarea>
+                            <textarea name="description" id="" cols="30" rows="10" class="resize-none rounded w-full overflow-auto bg-slate-100 border-none"></textarea>
                         </div>
                         <div class="mt-2">
-                            <input type="submit" value="Update" class="w-full bg-green-800 rounded cursor-pointer text-white p-2 hover:bg-green-900">
+                            <input type="submit" name="update" value="Update" class="w-full bg-green-800 rounded cursor-pointer text-white p-2 hover:bg-green-900">
                         </div>
                     </form>
                 </div>
@@ -190,7 +190,7 @@
                             <div class="hidden" id="showButtonCaption">
                                 <div class="flex flex-col bg-slate-200 mt-1 rounded absolute w-20">
                                     <button id="buttonUpdateDescription" class="w-full bg-slate-300 p-1 text-zinc-700 border-slate-200 hover:bg-slate-400 border-b">Edit</button>
-                                    <button class="bg-slate-300 text-zinc-700 p-1 border-slate-200 hover:bg-slate-400">Delete</button>
+
                                 </div>
                             </div>
                         </div>

@@ -60,15 +60,18 @@ Route::controller(TemplatesController::class)->group(function () {
 
     //route for delete template
     Route::get('/users/delete_template/{template_id}', 'delete_template');
+
+    //route for updating template descriptions
+    Route::post('/users/editDescription/{template_id}', 'editTemplateDescription');
 });
 
 
 Route::controller(LoginController::class)->group(function () {
     //route for login
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', 'login')->name('login');
 
     //route for logout
-    Route::get('/users/logout', [LoginController::class, 'logout']);
+    Route::get('/users/logout', 'logout');
 });
 
 

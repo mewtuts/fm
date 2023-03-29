@@ -80,7 +80,8 @@ class CategoryController extends Controller
             'category_ids' => $category_ids,
             'title' => $template->title,
             'descriptions' => $template->descriptions,
-            'recentlyInsertedData' => $recentlyInsertedData
+            'recentlyInsertedData' => $recentlyInsertedData,
+            'template_id' => $template_id
         ]);
     }
 

@@ -95,4 +95,16 @@ class TemplatesController extends Controller
 
         }
     }
+
+
+    //method for editing desriptions of template
+    public function editTemplateDescription(Request $request, $template_id){
+
+        $template = Templates::find($template_id);
+        $template->descriptions = $request->description;
+        $template->save();
+
+        return redirect()->back()->with('success', 'successfully update caption');
+
+    }
 }
