@@ -14,6 +14,26 @@
     </style>
 </head>
 <body class="font-poppins bg-slate-50">
+    <!-- Error Message form -->
+    @if(session()->has('message'))
+    <div class="" id="showErrorMessage">
+        <div class="h-screen w-screen absolute flex justify-center items-center">
+            <div class="">
+                <form action="{{ '/users/continue_delete_template/'.session('template_id') }}" method="post" class="px-5 py-2 rounded bg-slate-200 w-register-box">@csrf
+                    <p class="text-center p-5 text-xl text-zinc-700"><span class="text-red-600">Ooops!</span> {{ session('message') }}</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <div></div>
+                        <div class="">
+                            <input type="submit" name="submit" value="Cancel" class="bg-red-800 cursor-pointer py-3 px-4 text-slate-50 rounded hover:bg-red-900 p-2">
+                            <input type="submit" value="Continue" name="submit" class="text-center cursor-pointer rounded py-3 px-4 bg-green-800 text-slate-50 hover:bg-green-900">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 outline-none focus:ring-2 focus:bg-green-800 focus:text-white">
         <span class="sr-only">Open sidebar</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +62,7 @@
                         <input type="text" placeholder="Folder Name" name="title" class="w-full p-3 rounded-lg focus:outline-none focus:outline-green-900 border-none">
                         <!-- Title Description || textarea -->
                         <div class="mt-3">
-                            <textarea name="descriptions" id="" cols="30" rows="10" placeholder="Title description" class="resize-none p-2 border-none rounded-lg"></textarea>
+                            <textarea name="descriptions" id="" cols="30" rows="10" placeholder="Title description" class="resize-none p-2 border-none rounded-lg" required></textarea>
                         </div>
                         <!-- Buttons -->
                         <div class="flex justify-end mt-3">
@@ -105,21 +125,21 @@
                                     </p>
 
                                     <!-- Update New Name -->
-                                    <div class="absolute flex items-end mt-10">
+                                    <div class="flex items-end mt-5">
                                          <form action="{{ '/users/editTemplate/'.$template->id }}" method="POST" class="hidden showFolderUpdate"> @csrf
                                             <div>
-                                                <input class="h-20 bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">
-                                                <input type="submit" name="submit" value="Go" class="h-20 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
+                                                <input class="bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">
+                                                <input type="submit" name="submit" value="Go" class="h-10 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
                                             </div>
                                          </form>
                                     </div>
 
-                                    <a href="" class="text-xl text-center mb-10">
+                                    <a href="" class="text-2xl text-center mb-5">
                                         {{ $template->title }}
                                     </a>
                                     <!-- Template Description -->
                                     <div class="px-5 max-h-32 h-fit border-2 border-transparent overflow-hidden mb-2">
-                                        <p class="text-center">{{ $template->descriptions }}</p>
+                                        <p class="text-center text-lg">{{ $template->descriptions }}</p>
                                     </div>
                                 </div>
                         @endif

@@ -29,7 +29,7 @@ module.exports = {
         'poppins' : ['poppins'],
       },
       width : {
-        'register-box' : '40rem',
+        'register-box' : '32rem',
       },
       height : {
         'caption-box' : '45.5rem',

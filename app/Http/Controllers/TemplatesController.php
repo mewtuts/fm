@@ -15,7 +15,7 @@ class TemplatesController extends Controller
     public function addTemplate(Request $request){
 
         $request->validate([
-            'title' => 'required|regex:/^[a-zA-Z\s]+$/'
+            'title' => 'required|regex:/^[a-zA-Z0-9\s]+$/'
         ]);
 
         $user_id = FacadesSession::get('user_id');
@@ -49,17 +49,35 @@ class TemplatesController extends Controller
     }
 
     //method for deleting template
-    public function delete_template($template_id){
+    public function delete_template(Request $request, $template_id){
 
-        $template = Templates::find($template_id);
+        $category = Category::where('template_id', $template_id)->count();
 
-        File::deleteDirectory($template->title);
+        if ( $category >= 0 ) {
+            
+            session()->flash('message', 'All folders and files will be deleted. Are you sure you want to continue?');
+            session()->put('template_id', $template_id);
+            return redirect()->back();
 
-        $template->delete();
+        }
 
+    }
 
+    public function continue_delete_template(Request $request, $template_id){
 
-        return redirect()->back()->with('success', 'Succesfully delete template');
+        if ( $request->submit == "Continue" ) {
+
+            $template = Templates::find($template_id);
+            File::deleteDirectory($template->title);
+            $template->delete();
+
+            return redirect()->back()->with('success', 'Succesfully delete template');
+
+        } else if ( $request->submit == "Cancel" ) {
+
+            return redirect('/users/home');
+
+        }
 
     }
 

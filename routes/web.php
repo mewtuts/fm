@@ -46,7 +46,9 @@ Route::get('/users/home', function(){
     $template = Templates::where('user_id', $user_id)->get();
 
     return view('users.home', [
+
         'templates' => $template
+
     ]);
 });
 
@@ -60,6 +62,8 @@ Route::controller(TemplatesController::class)->group(function () {
 
     //route for delete template
     Route::get('/users/delete_template/{template_id}', 'delete_template');
+
+    Route::post('/users/continue_delete_template/{template_id}', 'continue_delete_template');
 
     //route for updating template descriptions
     Route::post('/users/editDescription/{template_id}', 'editTemplateDescription');
