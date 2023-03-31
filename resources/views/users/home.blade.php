@@ -46,8 +46,8 @@
         <div class="h-full px-5 py-4 overflow-y-auto bg-green-800">
             <!-- Logo -->
             <a href="#" class="flex items-center mb-5 mt-2">
-                <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i>
-                <span class="self-center text-2xl font-semibold whitespace-nowrap text-slate-50">File Management</span>
+                {{-- <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i> --}}
+                <h1 class="text-center  text-3xl w-full text-slate-50">Create Templates</h1>
             </a>
             <ul class="space-y-2 mt-10">
                 <li class="rounded-xl" id="showTemplate">

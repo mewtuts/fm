@@ -54,10 +54,10 @@
 </head>
 <body>
 <body class="bg-slate-50">
-    <header class="bg-slate-100 h-20 flex">
+    <header class="bg-green-800 h-24 flex">
         <a href="{{ '/users/home' }}" class="flex items-center p-4" title="Home">
-            <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i>
-            <span class="self-center text-2xl font-semibold whitespace-nowrap text-green-800">File Management</span>
+            {{-- <i class="bi bi-folder-fill text-orange-300 text-4xl pr-4"></i> --}}
+            <h1 class="text-center text-3xl text-slate-50">Folders and Files</h1>
         </a>
     </header>
 
