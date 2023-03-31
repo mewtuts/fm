@@ -10,7 +10,7 @@
             {{ $category->title }}
         </div>
     @else
-        <div class="w-full ml-2 rounded pl-3 pr-6 py-2 bg-slate-300 cursor-pointer text-zinc-800 text-lg" onclick="changIcon(this)">
+        <div data-id="{{ $category->id }}" class="item w-full ml-2 rounded pl-3 pr-6 py-2 bg-slate-300 cursor-pointer text-zinc-800 text-lg" onclick="getParentID()">
             <input class="" type="radio" name="id" value="{{ $category->id }}folder" required>
             <i class="bi bi-folder-fill text-orange-300 text-xl pr-2"></i>
             @php

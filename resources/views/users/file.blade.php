@@ -111,14 +111,16 @@
                             <form action="{{ route('storeSubParent') }}" class="px-5 py-10 bg-slate-200 rounded-lg flex items-center flex-col" method="post">@csrf
                                 <span class="pb-10 text-zinc-700 text-2xl">Create Folder</span>
                                 <input type="text" name="title" placeholder="Folder Name" class="w-full p-3 rounded border-none bg-slate-50">
-                                <select name="parent_id" id="" class="w-full mt-3 p-3 rounded text-zinc-600 border-none bg-slate-50">
+                                <input id="demo" type="text" name="parent_id">
+                                {{-- <p id="demo"></p> --}}
+                                {{-- <select name="parent_id" id="" class="w-full mt-3 p-3 rounded text-zinc-600 border-none bg-slate-50">
                                     <option value="" selected disabled>Specify where the folder will locate</option>
                                     @foreach ($categories as $category)
 
                                         <x-select-category :category="$category" />
 
                                     @endforeach
-                                </select>
+                                </select> --}}
                                 <input type="submit" value="Create Folder" class="w-full p-3 text-lg bg-green-800 hover:bg-green-900 text-slate-50 mt-7 rounded cursor-pointer">
                             </form>
                         </div>
@@ -293,10 +295,43 @@
         })
     </script>
 
-
     <!-- Flowbite JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <!-- Jquery Validate Plugin  -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
 </body>
 </html>
+
+<script>
+
+    function getParentID(){
+
+        var items = document.querySelectorAll('.item');
+
+        for (var index = 0; index < items.length; index++) {
+
+            items[index].addEventListener('click', function(event) {
+
+                var clickedDiv = event.target;
+
+                var attributeValue = clickedDiv.getAttribute('data-id');
+
+                var myInput = document.getElementById("demo");
+
+                myInput.value = attributeValue;
+
+            });
+
+            // const itemID = items[index].getAttribute('data-id');
+            // //document.getElementById("demo").innerHTML = itemID;
+            // console.log('Item ID: '+itemID);
+        }
+
+
+        // let parent_id = document.getElementById("parent_id");
+        // let text = parent_id.getAttribute("value");
+        // document.getElementById("demo").innerHTML = text;
+
+
+    }
+</script>
