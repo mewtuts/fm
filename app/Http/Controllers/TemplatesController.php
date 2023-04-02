@@ -23,6 +23,7 @@ class TemplatesController extends Controller
         $template = new Templates();
         $template->title = $request->title;
         $template->descriptions = $request->descriptions;
+        $template->status = 0;
         $template->user_id = $user_id;
         $template->save();
 
@@ -33,6 +34,7 @@ class TemplatesController extends Controller
         $category->user_id = $user_id;
         $category->title = $request->title;
         $category->template_id = $template_id->id;
+        $category->status = 0;
         $category->save();
 
         //making folder inside the storage directory.
@@ -54,7 +56,7 @@ class TemplatesController extends Controller
         $category = Category::where('template_id', $template_id)->count();
 
         if ( $category >= 0 ) {
-            
+
             session()->flash('message', 'All folders and files will be deleted. Are you sure you want to continue?');
             session()->put('template_id', $template_id);
             return redirect()->back();

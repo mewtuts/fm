@@ -17,9 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('template_id');
-            $table->string('title');
+            $table->text('title');
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->string('roman')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('template_id')->references('id')->on('templates')->onDelete('cascade');

@@ -134,9 +134,9 @@
                                          </form>
                                     </div>
 
-                                    <a href="" class="text-2xl text-center mb-5">
+                                    <p class="text-2xl text-center mb-5">
                                         {{ $template->title }}
-                                    </a>
+                                    </p>
                                     <!-- Template Description -->
                                     <div class="px-5 max-h-32 h-fit border-2 border-transparent overflow-hidden mb-2">
                                         <p class="text-center text-lg">{{ $template->descriptions }}</p>

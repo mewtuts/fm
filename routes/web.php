@@ -23,9 +23,11 @@ use SebastianBergmann\Template\Template;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('login');
+
+Route::get('/practice', function(){
+    return view('practice_field.index');
 });
+
 Route::get('/register', function () {
     return view('register');
 });
@@ -80,6 +82,10 @@ Route::controller(LoginController::class)->group(function () {
 
 
 Route::controller(CategoryController::class)->group( function () {
+
+    //route for homepage
+    Route::get('/', 'homepage');
+
     //route for viewing file page
     Route::get('/users/file/{template_id}', 'file');
 
@@ -102,12 +108,5 @@ Route::controller(CategoryController::class)->group( function () {
     Route::post('/users/delete_sff', 'delete_sff');
 
     Route::post('/users/home', 'addParentFolder')->name('addParentFolder');
-});
 
-Route::controller(UsersController::class)->group(function () {
-    Route::get('/users/content/{template_id}', 'content');
-
-    Route::post('/users/content/file/upload/{content_id}', 'upload_file');
-
-    Route::post('/users/content/{template_id}/{name}/mkdir', 'mkdir');
 });

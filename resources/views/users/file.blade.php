@@ -1,45 +1,3 @@
-@php
-    use App\Models\Category;
-@endphp
-@php
-
-    function findParent($parent_id){
-
-        $category = Category::find($parent_id);
-
-        return $category->title;
-    }
-
-    //method for converting a number to Roman numerals
-    function toRomanNumerals($number)
-    {
-        $romanNumerals = [
-            1000 => 'M',
-            900 => 'CM',
-            500 => 'D',
-            400 => 'CD',
-            100 => 'C',
-            90 => 'XC',
-            50 => 'L',
-            40 => 'XL',
-            10 => 'X',
-            9 => 'IX',
-            5 => 'V',
-            4 => 'IV',
-            1 => 'I',
-        ];
-
-        $result = '';
-        foreach ($romanNumerals as $value => $numeral) {
-            while ($number >= $value) {
-                $result .= $numeral;
-                $number -= $value;
-            }
-        }
-
-        return $result;
-    }
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +9,11 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     @vite('resources//css/app.css')
     <title>Folder and Files</title>
+    <style>
+        .highlighted {
+            background-color: yellow;
+        }
+    </style>
 </head>
 <body>
 <body class="bg-slate-50">
@@ -111,16 +74,7 @@
                             <form action="{{ route('storeSubParent') }}" class="px-5 py-10 bg-slate-200 rounded-lg flex items-center flex-col" method="post">@csrf
                                 <span class="pb-10 text-zinc-700 text-2xl">Create Folder</span>
                                 <input type="text" name="title" placeholder="Folder Name" class="w-full p-3 rounded border-none bg-slate-50">
-                                <input id="demo" type="text" name="parent_id">
-                                {{-- <p id="demo"></p> --}}
-                                {{-- <select name="parent_id" id="" class="w-full mt-3 p-3 rounded text-zinc-600 border-none bg-slate-50">
-                                    <option value="" selected disabled>Specify where the folder will locate</option>
-                                    @foreach ($categories as $category)
-
-                                        <x-select-category :category="$category" />
-
-                                    @endforeach
-                                </select> --}}
+                                <input id="parentID_Folder" type="hidden" value="{{ $parentCategoryID }}" name="parent_id" required>
                                 <input type="submit" value="Create Folder" class="w-full p-3 text-lg bg-green-800 hover:bg-green-900 text-slate-50 mt-7 rounded cursor-pointer">
                             </form>
                         </div>
@@ -128,7 +82,7 @@
                         <div class="hidden w-full" id="showUploadFile">
                             <form action="{{ route('uploadFile') }}" class="px-5 py-10 bg-slate-200 rounded flex items-center flex-col" method="post" enctype="multipart/form-data">@csrf
                                 <span class="pb-10 text-zinc-700 text-2xl">Upload File</span>
-                                <input type="text" placeholder="Folder Name" class="w-full p-3 rounded border-none bg-slate-50" name="alternative_name">
+                                <input type="text" placeholder="File Name" class="w-full p-3 rounded border-none bg-slate-50" name="alternative_name">
                                 <div class="flex mt-3 items-center justify-center w-full">
                                     <label for="dropzone-file" class="flex flex-col items-center justify-center rounded w-full h-fit border-2 bg-slate-50 cursor-pointer">
                                     <i class="bi bi-cloud-arrow-up-fill text-green-800 text-3xl pt-3"></i>
@@ -136,12 +90,7 @@
                                     <input id="dropzone-file" type="file" name="file" class="hidden" />
                                     </label>
                                 </div>
-                                <select name="parent_id" id="" class="w-full mt-3 p-3 rounded text-zinc-600 border-none bg-slate-50">
-                                    <option value="" selected disabled>Specify where the folder will locate</option>
-                                    @foreach ($categories as $category)
-                                        <x-select-category :category="$category" />
-                                    @endforeach
-                                </select>
+                                <input id="parentID_File" type="hidden" name="parent_id" required>
                                 <input type="submit" value="Upload File" class="w-full p-3 text-lg bg-green-800 hover:bg-green-900 text-slate-50 mt-7 rounded cursor-pointer">
                             </form>
                         </div>
@@ -150,14 +99,9 @@
                         <div class="hidden w-full" id="showUploadFileUrl">
                             <form action="{{ route('uploadUrl') }}" class="px-5 py-10 bg-slate-200 rounded flex items-center flex-col" method="post">@csrf
                                 <span class="pb-10 text-zinc-700 text-2xl">Upload Url</span>
-                                <input type="text" class="w-full p-3 rounded border-none bg-slate-50" placeholder="Display Name" name="alternative_name" required>
-                                <input type="url" class="mt-3 w-full p-3 rounded border-none bg-slate-50" placeholder="Url" name="url" required>
-                                <select name="parent_id" id="" class="w-full mt-3 p-3 rounded text-zinc-600 border-none bg-slate-50" required>
-                                    <option value="" selected disabled>Specify where the folder will locate</option>
-                                    @foreach ($categories as $category)
-                                        <x-select-category :category="$category" />
-                                    @endforeach
-                                </select>
+                                <input type="text" class="w-full p-3 rounded border-none bg-slate-50" placeholder="URL Name" name="alternative_name" required>
+                                <input type="url" class="mt-3 w-full p-3 rounded border-none bg-slate-50" placeholder="URL" name="url" required>
+                                <input id="parentID_URL" type="hidden" name="parent_id">
                                 <input type="submit" value="Upload Url" class="w-full p-3 text-lg bg-green-800 hover:bg-green-900 text-slate-50 mt-7 rounded cursor-pointer">
                             </form>
                         </div>
@@ -234,6 +178,8 @@
                             <label for="delete"><i class="bi bi-trash-fill w-full text-zinc-700 cursor-pointer text-xl hover:text-2xl"></i></label>
                             <input class="border-2 border-black p-2 cursor-pointer hidden" type="submit" name="submit" value="delete" id="delete" >
                         </div>
+
+                        <input id="fileID" type="hidden" name="id">
 
                         @foreach ($categories as $index => $category)
 
@@ -316,22 +262,25 @@
 
                 var attributeValue = clickedDiv.getAttribute('data-id');
 
-                var myInput = document.getElementById("demo");
+                clickedDiv.classList.toggle('highlighted');
 
-                myInput.value = attributeValue;
+                var parentID_Folder = document.getElementById("parentID_Folder");
+
+                    parentID_Folder.value = attributeValue;
+
+                var parentID_File = document.getElementById("parentID_File");
+
+                    parentID_File.value = attributeValue;
+
+                var parentID_URL = document.getElementById("parentID_URL");
+
+                    parentID_URL.value = attributeValue;
+
+                var fileID = document.getElementById("fileID");
+
+                    fileID.value = attributeValue;
 
             });
-
-            // const itemID = items[index].getAttribute('data-id');
-            // //document.getElementById("demo").innerHTML = itemID;
-            // console.log('Item ID: '+itemID);
         }
-
-
-        // let parent_id = document.getElementById("parent_id");
-        // let text = parent_id.getAttribute("value");
-        // document.getElementById("demo").innerHTML = text;
-
-
     }
 </script>

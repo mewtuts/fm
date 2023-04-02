@@ -18,6 +18,22 @@ use SebastianBergmann\Template\Template;
 
 class CategoryController extends Controller
 {
+
+    public function homepage(){
+
+        //Getting all the folders and Files to be store in categories variable
+
+        $categories = Category::tree()
+            ->with('getFiles')
+            ->where('status', 0)
+            ->get()
+            ->toTree();
+
+        //dd($categories);
+        return view('login', compact('categories'));
+
+    }
+
     //method for converting a number to Roman numerals
     public function toRomanNumerals($number)
     {
@@ -59,6 +75,12 @@ class CategoryController extends Controller
 
         $category_ids = $category->getDescendants($category);
 
+        $firstParentCategoryID = Category::where('template_id', $template_id)
+        ->where('parent_id', null)
+        ->first();
+
+        $parentCategoryID = $firstParentCategoryID->id;
+
         $categories = Category::tree()
         ->with('getFiles')
         ->where('template_id', $template_id)
@@ -81,7 +103,8 @@ class CategoryController extends Controller
             'title' => $template->title,
             'descriptions' => $template->descriptions,
             'recentlyInsertedData' => $recentlyInsertedData,
-            'template_id' => $template_id
+            'template_id' => $template_id,
+            'parentCategoryID' => $parentCategoryID
         ]);
     }
 
@@ -112,8 +135,15 @@ class CategoryController extends Controller
     public function storeSubParent(Request $request){
         //validation for request input.
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'parent_id' => 'required'
         ]);
+
+        if ( Str::contains($request->parent_id, 'file') ) {
+            return redirect()->back()->with('error', 'please specify the parent folder');
+        } else {
+            $parent_id = Str::replaceFirst('folder', '', $request->parent_id);
+        }
 
         //getting the user id from session
         $user_id = FacadesSession::get('user_id');
@@ -122,43 +152,24 @@ class CategoryController extends Controller
         $template_id = FacadesSession::get('template_id');
 
         //getting the parent title, id and user id
-        $parent_category = Category::select('id', 'title', 'roman')->where('id', $request->parent_id)->first();
+        $parent_category = Category::select('id', 'title')->where('id', $parent_id)->first();
 
         //getting the latest row in Contents Table
         $category_latest_id = Category::select('id')->latest('created_at')->first();
-
-        //storing roman value
-        if ($request->parent_id === null) {
-            $find = Category::where('template_id', $template_id)->first();
-            $id = $find->id;
-            $countParentID = Category::where('parent_id', $id)->count();
-            $roman = $this->toRomanNumerals($countParentID+1);
-        }
-        else {
-            $countParentID = Category::where('parent_id', $request->parent_id)->count();
-            if ( $parent_category->roman == 0) {
-                $parentRoman = $parent_category->roman;
-            }else{
-                $parentRoman = $parent_category->roman.'.';
-            }
-            $roman =  $parentRoman.$this->toRomanNumerals($countParentID+1);
-        }
-        //end storing roman value
 
         //calling category table from database to store input request.
         $category = new Category();
         $category->user_id = $user_id;
         $category->template_id = $template_id;
         $category->title = $request->title;
-        $category->parent_id = $request->parent_id;
-        $category->roman = $roman;
+        $category->parent_id = $parent_id;
+        $category->status = 0;
         $category->save();
+
+        return redirect()->back();
 
         //making a directory folder in local directory path 'storage/app'
         //Storage::disk('local')->makeDirectory($request->title, '');
-
-        //return to current page.
-        return redirect()->back();
     }
 
 
@@ -171,6 +182,12 @@ class CategoryController extends Controller
             'alternative_name' => 'required'
         ]);
 
+        if ( Str::contains($request->parent_id, 'file') ) {
+            return redirect()->back()->with('error', 'please specify the parent folder');
+        } else {
+            $parent_id = Str::replaceFirst('folder', '', $request->parent_id);
+        }
+
         //getting the user id from session
         $user_id = FacadesSession::get('user_id');
 
@@ -182,7 +199,7 @@ class CategoryController extends Controller
         $template_name = $templates->title;
 
         //getting the parent title, id and user id
-        $parent_category = Category::select('id', 'title')->where('id', $request->parent_id)->first();
+        $parent_category = Category::select('id', 'title')->where('id', $parent_id)->first();
 
         //Storing the file name
         $uploaded_file = $request->file->getClientOriginalName();
@@ -198,7 +215,7 @@ class CategoryController extends Controller
         $file_path = storage_path($parent_category->title.$user_id);
 
         $file = new Files();
-        $file->category_id = $request->parent_id;
+        $file->category_id = $parent_id;
         $file->alternative_name = $request->alternative_name;
         $file->file_name = $file_name;
         $file->file_type = $file_type;
@@ -217,8 +234,15 @@ class CategoryController extends Controller
     public function uploadUrl(Request $request){
         $request->validate([
             'url' => 'required|url',
-            'alternative_name' => 'required|unique:files,alternative_name'
+            'alternative_name' => 'required|unique:files,alternative_name',
+            'parent_id' => 'required'
         ]);
+
+        if ( Str::contains($request->parent_id, 'file') ) {
+            return redirect()->back()->with('error', 'please specify the parent folder');
+        } else {
+            $parent_id = Str::replaceFirst('folder', '', $request->parent_id);
+        }
 
         //getting the user id from session
         $user_id = FacadesSession::get('user_id');
@@ -230,39 +254,13 @@ class CategoryController extends Controller
         $file->alternative_name = $request->alternative_name;
         $file->url = $request->url;
         $file->file_type = "url";
-        $file->category_id = $request->parent_id;
+        $file->category_id = $parent_id;
         $file->save();
 
         return redirect()->back()->with('success', 'succesfully upload URL');
 
     }
 
-
-    //method for showing the content of selected file
-    // public function viewFile(Request $request, $title, $file_id){
-    //     // Disable the debug mode to prevent PHP warnings from being displayed
-    //     Settings::setOutputEscapingEnabled(true);
-
-    //     $files = Files::find($file_id);
-
-    //     $user_id = FacadesSession::get('user_id');
-
-    //     $title = $title;
-
-    //     $path = '/app/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
-
-    //     // Read the DOCX file and convert it to HTML
-    //     $phpword = IOFactory::load(storage_path($path));
-
-    //     $tempFile = tempnam(sys_get_temp_dir(), 'phpword');
-    //     $htmlWriter = IOFactory::createWriter($phpword, 'HTML');
-    //     $htmlWriter->save($tempFile);
-
-    //     $html = file_get_contents($tempFile);
-
-    //     return view('users.viewFile', compact('html'));
-
-    // }
     //method for showing the content of selected file
     public function viewFile(Request $request, $title, $file_id){
 

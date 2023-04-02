@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->string('title')->nullable();
+            $table->text('title')->nullable();
             $table->text('descriptions')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

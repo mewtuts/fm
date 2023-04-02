@@ -22,6 +22,19 @@
             opacity: 0.2;
             overflow: hidden;
         }
+        .list-roman {
+          list-style-type: upper-roman;
+          margin-left: 2rem;
+        }
+        .list-lower-roman {
+          list-style-type: lower-roman;
+          margin-left: 2rem;
+        }
+        .list-upper-alpha {
+          list-style-type: upper-alpha;
+          margin-left: 2rem;
+        }
+
     </style>
 </head>
 <body>
@@ -59,36 +72,19 @@ This initiative is envisioned as a step in the right direction towards solidifyi
                     </p>
                     {{-- Files and Folders --}}
                     <div class="">
-                        <div class="px-10 text-xl mb-10">
-                            <b>Folder Name</b>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File</p>
-                            </div>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File</p>
-                            </div>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File</p>
-                            </div>
-                        </div>
-                        <div class="px-10 text-xl mb-10">
-                            <b>Folder Name Two</b>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File Two</p>
-                            </div>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File Two</p>
-                            </div>
-                            <div class="text-base ml-10 cursor-pointer flex items-center w-fit justify-center">
-                                <i class="bi bi-dot text-3xl text-green-800"></i>
-                                <p class="text-green-800 text-lg text-center">Attachment File Two</p>
-                            </div>
-                        </div>
+
+                        @if (!isset($categories))
+
+                        @else
+                            {{-- <ol class="list-lower-roman px-6 text-xl mb-10"> --}}
+                            @foreach ($categories as $index => $category)
+
+                                <x-home-sub-category :category="$category" :index="$index" />
+
+                            @endforeach
+                            {{-- </ol> --}}
+                        @endif
+
                     </div>
                 </div>
                 {{-- Footer Section --}}

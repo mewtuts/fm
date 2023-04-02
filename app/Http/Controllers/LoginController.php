@@ -44,6 +44,6 @@ class LoginController extends Controller
         $request->session()->forget('email');
         $request->session()->forget('template_id');
 
-        return view('login');
+        return redirect('/');
     }
 }
