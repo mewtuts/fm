@@ -11,9 +11,12 @@
     <title>Templates</title>
     <style>
         /* Inline CSS */
+        .green{
+            background-color: #166534;
+        }
     </style>
 </head>
-<body class="font-poppins bg-slate-50">
+<body class="font-poppins bg-slate-50 ">
     <!-- Error Message form -->
     @if(session()->has('message'))
     <div class="" id="showErrorMessage">
@@ -106,13 +109,16 @@
                 @else
                     @foreach ($templates as $template)
                         @if (Session::get('user_id') == $template->user_id)
-                            <div class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200 hover:bg-green-800 hover:text-white">
+                            <div id="sample" class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
                                         <!-- View Folder -->
                                         <a href="{{ '/users/file/'.$template->id }}" class="cursor-pointer bg-blue-500 px-3 py-2 hover:bg-blue-600 text-white rounded-lg mr-2"><i class="bi bi-arrow-right"></i></a>
                                     </div>
                                     <div>
+                                        {{-- Duplication --}}
+                                        {{-- <a class="cursor-pointer bg-orange-500 py-2 px-1 hover:bg-orange-600 rounded-lg"><i class="bi bi-back text-slate-100 p-2"></i></a> --}}
+
                                         <!--Edit icon-->
                                         <a href="#edit" class="nameUpdate cursor-pointer bg-yellow-400 py-2 px-1 hover:bg-yellow-500 rounded-lg mr-2"><i class="bi bi-pencil-fill text-slate-100 p-2"></i></a>
 
@@ -120,7 +126,14 @@
                                         <a href="{{ '/users/delete_template/'.$template->id }}" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
                                     </div>
                                 </div>
-                                    <p class="text-5xl mb-10 mt-5 text-orange-300">
+                                <div class=" flex justify-end items-center w-full mt-2">
+                                    <span class="mr-3 text-base font-medium text-zinc-700">Set as active</span>
+                                    <label class="relative inline-flex items-center mr-5 cursor-pointer">
+                                        <input type="checkbox" value="" class="sr-only peer" id="checkbox">
+                                        <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-800"></div>
+                                    </label>
+                                </div>
+                                    <p class="text-5xl mt-8 text-orange-300">
                                         <i class="bi bi-folder-fill"></i>
                                     </p>
 
@@ -128,7 +141,7 @@
                                     <div class="flex items-end mt-5">
                                          <form action="{{ '/users/editTemplate/'.$template->id }}" method="POST" class="hidden showFolderUpdate"> @csrf
                                             <div>
-                                                <input class="bg-slate-100 border-none rounded-tl rounded-bl text-zinc-700" type="text" name="title" placeholder="New template name">
+                                                <input class="bg-green-800 border-none rounded-tl rounded-bl text-white" type="text" name="title" placeholder="New template name">
                                                 <input type="submit" name="submit" value="Go" class="h-10 text-base absoluite cursor-pointer bg-yellow-400 w-10 rounded-tr rounded-br hover:bg-yellow-500">
                                             </div>
                                          </form>
@@ -138,7 +151,7 @@
                                         {{ $template->title }}
                                     </p>
                                     <!-- Template Description -->
-                                    <div class="px-5 max-h-32 h-fit border-2 border-transparent overflow-hidden mb-2">
+                                    <div class="px-5 h-28 border-2 border-transparent overflow-hidden mb-2">
                                         <p class="text-center text-lg">{{ $template->descriptions }}</p>
                                     </div>
                                 </div>
@@ -149,12 +162,12 @@
         </div>
     </div>
 
-<!--Error Messages-->
-@if ($errors->any())
-    @foreach ($errors->all() as $error)
-        <script>alert('something went wrong')</script>
-    @endforeach
-@endif
+    <!--Error Messages-->
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>alert('something went wrong')</script>
+        @endforeach
+    @endif
 
     <script>
         $(document).ready(function(){
@@ -172,6 +185,16 @@
                 $(".showFolderUpdate").toggle();
             })
         });
+
+        // Set active background
+        const btn = document.querySelector('#checkbox')
+        const body = document.getElementById('sample')
+
+        function change(){
+            btn.checked ? body.classList.add("green") : body.classList.remove("green")
+        }
+
+        btn.addEventListener('change', change)
     </script>
 
     <!-- Flowbite JS -->

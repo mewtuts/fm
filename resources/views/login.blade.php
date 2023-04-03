@@ -115,7 +115,7 @@ This initiative is envisioned as a step in the right direction towards solidifyi
                     {{-- Copyright Section --}}
                     <div class="flex justify-center items-center mt-5">
                         <i class="bi bi-c-circle"></i>
-                        <p class="pl-2">File Management 2023™. All rights reserved.</p>
+                        <p class="pl-2">Transparency Seal 2023™. All rights reserved.</p>
                     </div>
                 </div>
 
