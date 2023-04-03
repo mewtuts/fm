@@ -261,7 +261,7 @@ class CategoryController extends Controller
 
     }
 
-    //method for showing the content of selected file
+    //method for showing the content of selected file inside user page
     public function viewFile(Request $request, $title, $file_id){
 
         $files = Files::find($file_id);
@@ -270,6 +270,27 @@ class CategoryController extends Controller
 
         $template_id = FacadesSession::get('template_id');
         $template = Templates::find($template_id);
+        $template_name = $template->title;
+        $title = $title;
+
+        $path = '/'.$template_name.'/'.$title.'/'.$files->file_name.'_'.$user_id.'.'.$files->file_type;
+
+        return view('users.viewFile', compact('path'));
+
+    }
+
+
+    //method for showing the content of selected file in home page
+    public function hViewFile(Request $request, $title, $file_id){
+
+        $files = Files::find($file_id);
+
+        $category = Category::find($files->category_id);
+
+        $template = Templates::find($category->template_id);
+
+        $user_id = $template->user_id;
+        $template_id = $template->id;
         $template_name = $template->title;
         $title = $title;
 

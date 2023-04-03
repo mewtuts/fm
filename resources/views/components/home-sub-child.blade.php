@@ -34,7 +34,7 @@
              @break
 
              @default
-                 <p class="text-green-800 text-lg text-center"><a href="{{ '/users/viewFile/'.$category->title.'/'.$file->id }}" target="_blank"> {{ $file->alternative_name }} (file)</a></p>
+                 <p class="text-green-800 text-lg text-center"><a href="{{ '/home/viewFile/'.$category->title.'/'.$file->id }}" target="_blank"> {{ $file->alternative_name }} (file)</a></p>
          @endswitch
      </div>
  @endforeach

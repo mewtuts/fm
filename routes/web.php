@@ -101,6 +101,9 @@ Route::controller(CategoryController::class)->group( function () {
     //route for viewing the uploaded file
     Route::get('/users/viewFile/{title}/{file_id}', 'viewFile');
 
+    //route for viewing the uploaded file from home page
+    Route::get('/home/viewFile/{title}/{file_id}', 'hViewFile');
+
     //route for downloading the uploaded file
     Route::get('/users/downloadFile/{folder}/{file_id}', 'downloadFile');
 
