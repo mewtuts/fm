@@ -11,7 +11,7 @@
     <title>Folder and Files</title>
     <style>
         .highlighted {
-            background-color: yellow;
+            background-color: #cbd5e1;
         }
     </style>
 </head>

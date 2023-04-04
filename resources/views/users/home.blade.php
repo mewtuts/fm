@@ -201,18 +201,14 @@
         });
 
         // Set active background
-        const btn = document.querySelector('#checkbox')
-        const body = document.getElementById('sample')
+        // const btn = document.querySelector('#checkbox')
+        // const body = document.getElementById('sample')
 
         function change(){
             btn.checked ? body.classList.add("green") : body.classList.remove("green")
-
         }
+
         btn.addEventListener('change', change)
-
-        function autoToggle(){
-            document.getElementById("myForm").submit();
-        }
     </script>
 
     <!-- Flowbite JS -->

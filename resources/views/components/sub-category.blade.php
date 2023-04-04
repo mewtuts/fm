@@ -6,7 +6,7 @@
     <!--Parent Folder-->
     @if ($category->parent_id != null)
 
-        <div data-id="{{ $category->id }}folder" class="item w-full ml-2 rounded pl-3 pr-6 py-2 bg-slate-300 cursor-pointer text-zinc-800 text-lg" onclick="getParentID()">
+        <div data-id="{{ $category->id }}folder" class="item w-full ml-2 rounded pl-3 pr-6 py-2 bg-slate-200 cursor-pointer text-zinc-800 text-lg" onclick="getParentID()">
             {{-- <input class="" type="radio" name="id" value="{{ $category->id }}folder" required> --}}
             <i class="bi bi-folder-fill text-orange-300 text-xl pr-2"></i>
         {{ $category->title }}
@@ -18,7 +18,7 @@
     <!--Uploaded files-->
     @foreach ($category->getFiles as $file)
 
-        <div data-id="{{ $file->id }}file" class='item ml-3 mt-1 cursor-pointer p-2 hover:bg-slate-300 rounded w-full text-zinc-600 border-b-2' onclick="getParentID()">
+        <div data-id="{{ $file->id }}file" class='item ml-3 mt-1 cursor-pointer p-2 hover:bg-slate-200 rounded w-full text-zinc-600 border-b-2' onclick="getParentID()">
             @if ($file->file_type == 'jpeg' || $file->file_type == 'jpg' || $file->file_type == 'png' || $file->file_type == 'gif')
                 {{-- <input class="radioShow" type="radio" id="image" name="id" value="{{ $file->id }}file" required> --}}
                 <i class="bi bi-file-earmark-image text-indigo-800 text-xl pr-2"></i>
