@@ -68,8 +68,8 @@ Route::controller(TemplatesController::class)->group(function () {
     //route for deleting template when user click the continue button in alert box
     Route::post('/users/continue_delete_template/{template_id}', 'continue_delete_template');
 
-    //route for setting status
-    Route::post('/user/changeStat/{template_id}', 'changeStatus');
+    //route for tting status
+    Route::get('/user/changeStat/{template_id}', 'changeStatus')->name('changeStatus');
 
     //route for updating template descriptions
     Route::post('/users/editDescription/{template_id}', 'editTemplateDescription');
