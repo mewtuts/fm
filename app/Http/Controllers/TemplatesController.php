@@ -127,4 +127,38 @@ class TemplatesController extends Controller
         return redirect()->back()->with('success', 'successfully update caption');
 
     }
+
+
+    //method for changing the template status
+    public function changeStatus(Request $request, $template_id){
+
+        $template = Templates::find($template_id);
+
+        // dd($template->status);
+
+        if ( $template->status === '0' ) {
+
+            $template->status = '1';
+            $template->save();
+
+            $category = Category::where('template_id', $template_id)
+            ->update([
+                'status' => '1'
+            ]);
+
+        } else {
+
+            $template->status = '0';
+            $template->save();
+
+            $category = Category::where('template_id', $template_id)
+            ->update([
+                'status' => '0'
+            ]);
+
+        }
+
+        return redirect()->back()->with('success', 'successfully change status');
+
+    }
 }

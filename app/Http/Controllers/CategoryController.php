@@ -25,7 +25,7 @@ class CategoryController extends Controller
 
         $categories = Category::tree()
             ->with('getFiles')
-            ->where('status', 0)
+            ->where('status', 1)
             ->get()
             ->toTree();
 

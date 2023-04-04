@@ -109,7 +109,13 @@
                 @else
                     @foreach ($templates as $template)
                         @if (Session::get('user_id') == $template->user_id)
-                            <div id="sample" class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
+                            @if ( $template->status == 0 )
+                                {{-- dito iyong default color --}}
+                                <div id="sample" class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
+                            @else
+                                {{-- dito iyong activated color --}}
+                                <div id="sample" class="green flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
+                            @endif
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
                                         <!-- View Folder -->
@@ -126,13 +132,21 @@
                                         <a href="{{ '/users/delete_template/'.$template->id }}" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
                                     </div>
                                 </div>
+                                <form action="{{ '/user/changeStat/'.$template->id }}" id="myForm" method="post">@csrf
                                 <div class=" flex justify-end items-center w-full mt-2">
                                     <span class="mr-3 text-base font-medium text-zinc-700">Set as active</span>
                                     <label class="relative inline-flex items-center mr-5 cursor-pointer">
-                                        <input type="checkbox" value="" class="sr-only peer" id="checkbox">
+                                            @if ( $template->status == 0 )
+                                                <input type="checkbox" value="" class="sr-only peer" id="checkbox" onclick="autoToggle()">
+                                            @else
+                                                <input type="checkbox" value="" class="sr-only peer" id="checkbox" onclick="autoToggle()" checked>
+                                            @endif
+                                                {{-- <input type="submit" name="submit" value="submit"> --}}
+                                        </form>
                                         <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-800"></div>
                                     </label>
                                 </div>
+                                </form>
                                     <p class="text-5xl mt-8 text-orange-300">
                                         <i class="bi bi-folder-fill"></i>
                                     </p>
@@ -192,9 +206,13 @@
 
         function change(){
             btn.checked ? body.classList.add("green") : body.classList.remove("green")
-        }
 
+        }
         btn.addEventListener('change', change)
+
+        function autoToggle(){
+            document.getElementById("myForm").submit();
+        }
     </script>
 
     <!-- Flowbite JS -->
