@@ -88,26 +88,26 @@ This initiative is envisioned as a step in the right direction towards solidifyi
                     </div>
                 </div>
                 {{-- Footer Section --}}
-                <div id="Footer" class=" bg-green-800 text-slate-50 py-5">
+                <div id="Footer" class=" bg-green-800 text-slate-50 py-5 px-10">
                     <footer class="flex items-center justify-around h-40 fl-md:h-fit fl-md:flex-col fl-md:w-full fl-md:justify-center ">
-                        <div class="h-full fl-md:mb-7">
+                        <div class="h-full fl-md:mb-7 px-5">
                             <p class="text-xl fl-md:text-center">About</p>
-                            <div class="pl-2 mt-2 fl-md:pl-0">
-                                <p>File Management contains folders and files.</p>
+                            <div class="pl-2 mt-2 fl-md:pl-0 max-w-md">
+                                <p class="fl-md:text-center">The <b>Transparency Seal</b>, depicted by a pearl shining out of an open shell, is a symbol of a policy shift towards openness in access to government information.</p>
                             </div>
                         </div>
-                        <div class="h-full fl-md:mb-7">
+                        <div class="h-full fl-md:mb-7 px-5 ">
                             <p class="text-xl fl-md:text-center">Developer</p>
-                            <div class=" pl-2 mt-2 fl-md:pl-0">
-                                <div class="flex items-center"><img src="{{ asset ('image/jomar.jpg') }}" alt="" class="w-9 rounded-full h-9 border-2 border-zinc-600"><p class="ml-2">Jomar A. Macaraeg</p></div>
-                                <div class="flex items-center mt-2"><img src="{{ asset ('image/nath.jpg') }}" alt="" class="w-9 rounded-full h-9 border-2 border-zinc-600"><p class="ml-2">Nathaniel DC. Teria</p></div>
+                            <div class=" pl-2 mt-2 fl-md:pl-0 max-w-sm">
+                                <div class="flex items-center"><img src="{{ asset ('image/jomar.jpg') }}" alt="" class="w-9 rounded-full h-9 border-2 border-zinc-600"><p class="ml-2 fl-md:text-center">Jomar A. Macaraeg</p></div>
+                                <div class="flex items-center mt-2 fl-md:text-center"><img src="{{ asset ('image/nath.jpg') }}" alt="" class="w-9 rounded-full h-9 border-2 border-zinc-600"><p class="ml-2">Nathaniel DC. Teria</p></div>
                             </div>
                         </div>
-                        <div class="h-full fl-md:mb-7">
+                        <div class="h-full fl-md:mb-7 px-5">
                             <p class="text-xl fl-md:text-center">Email us</p>
-                            <div class=" pl-2 mt-2 fl-md:pl-0">
-                                <div class="flex items-center"><i class="bi bi-envelope text-xl"></i><p class="ml-2">jmmacaraeg@gmail.com</p></div>
-                                <div class="flex items-center"><i class="bi bi-envelope text-xl"></i><p class="ml-2">nathanieldcteria@gmail.com</p></div>
+                            <div class=" pl-2 mt-2 fl-md:pl-0 max-w-sm">
+                                <div class="flex items-center"><i class="fl-md:text-center bi bi-envelope text-xl"></i><p class="ml-2">jmmacaraeg@gmail.com</p></div>
+                                <div class="flex items-center"><i class="fl-md:text-center bi bi-envelope text-xl"></i><p class="ml-2">nathanieldcteria@gmail.com</p></div>
                             </div>
                         </div>
                     </footer>

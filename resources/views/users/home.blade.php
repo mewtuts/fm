@@ -111,10 +111,10 @@
                         @if (Session::get('user_id') == $template->user_id)
                             @if ( $template->status == 0 )
                                 {{-- dito iyong default color --}}
-                                <div id="sample" class="flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
+                                <div id="sample" class="flex items-center justify-center flex-col shadow h-fit rounded-xl tex-white bg-slate-100 border-2 border-slate-200">
                             @else
                                 {{-- dito iyong activated color --}}
-                                <div id="sample" class="green flex items-center justify-center flex-col shadow h-fit rounded-xl text-zinc-600 bg-slate-100 border-2 border-slate-200">
+                                <div id="sample" class="green flex items-center justify-center flex-col shadow h-fit rounded-xl text-white bg-slate-100 border-2 border-slate-200">
                             @endif
                                 <div class="w-full p-5 flex justify-between">
                                     <div>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class=" flex justify-end items-center w-full mt-2">
-                                    <span class="mr-3 text-base font-medium text-zinc-700">Set as active</span>
+                                    <span class="mr-3 text-base font-medium">Set as active</span>
                                     <label class="relative inline-flex items-center mr-5 cursor-pointer">
 
                                             @if ( $template->status == 0 )
