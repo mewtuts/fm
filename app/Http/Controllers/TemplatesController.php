@@ -134,7 +134,7 @@ class TemplatesController extends Controller
 
         $template = Templates::find($template_id);
 
-        dd($template_id);
+        //dd($template_id);
 
         if ( $template->status === '0' ) {
 
