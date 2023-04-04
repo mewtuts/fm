@@ -132,17 +132,37 @@
                                         <a href="{{ '/users/delete_template/'.$template->id }}" class="cursor-pointer bg-red-500 py-2 px-1 hover:bg-red-600 rounded-lg"><i class="bi bi-trash3-fill text-slate-100 p-2"></i></a>
                                     </div>
                                 </div>
-                                <form action="{{ '/user/changeStat/'.$template->id }}" id="myForm" method="post">@csrf
+
                                 <div class=" flex justify-end items-center w-full mt-2">
                                     <span class="mr-3 text-base font-medium text-zinc-700">Set as active</span>
                                     <label class="relative inline-flex items-center mr-5 cursor-pointer">
+
                                             @if ( $template->status == 0 )
-                                                <input type="checkbox" value="" class="sr-only peer" id="checkbox" onclick="autoToggle()">
+                                            {{-- Naka off --}}
+                                                <input type="checkbox" value="Enable{{$template->id}}" class="sr-only peer" id="checkbox" onchange='javascript:handleToggle(this)'>
                                             @else
-                                                <input type="checkbox" value="" class="sr-only peer" id="checkbox" onclick="autoToggle()" checked>
+                                            {{-- naka on --}}
+                                                <input type="checkbox" value="Disable{{$template->id}}" class="sr-only peer" id="checkbox" onchange='javascript:handleToggle(this)' checked>
                                             @endif
-                                                {{-- <input type="submit" name="submit" value="submit"> --}}
-                                        </form>
+
+                                        <script>
+                                        function handleToggle(elm){
+                                            if(elm.value.includes('Enable')==true){
+                                                var newStr = elm.value.replace('Enable', '');
+
+                                                var url = "{{ route('changeStatus', "$template->id") }}";
+                                                location.href = url;
+                                                return;
+                                            }
+                                            if(elm.value.includes('Disable')==true){
+                                                var newStr = elm.value.replace('Disable', '');
+
+                                                var url = "{{ route('changeStatus', "$template->id") }}";
+                                                location.href = url;
+                                                return;
+                                            }
+                                        }
+                                        </script>
                                         <div class="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-800"></div>
                                     </label>
                                 </div>
