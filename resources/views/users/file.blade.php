@@ -262,7 +262,7 @@
 
                 var attributeValue = clickedDiv.getAttribute('data-id');
 
-                clickedDiv.classList.toggle('highlighted');
+                    clickedDiv.classList.toggle('highlighted');
 
                 var parentID_Folder = document.getElementById("parentID_Folder");
 
